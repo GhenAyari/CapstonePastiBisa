@@ -7,6 +7,7 @@ package app.view;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
+import app.controller.AuthController;
 
 /**
  * @author Asus
@@ -14,7 +15,50 @@ import javax.swing.GroupLayout;
 public class Login extends JFrame {
     public Login() {
         initComponents();
+        wireEvents();
     }
+
+    // ======== METHOD BARU BUAT EVENT BUTTON ==========
+    private void wireEvents() {
+        TombLogin.addActionListener(e -> onLoginClicked());
+        TombRegister.addActionListener(e -> onRegisterClicked());
+    }
+
+    private void onLoginClicked() {
+        String role = (String) TombRole.getSelectedItem();
+        String username = InputUsernameLogin.getText().trim();
+        String password = InputPasswordLogin.getText().trim();
+
+        try {
+            if ("Admin".equalsIgnoreCase(role)) {
+                int adminId = AuthController.loginAdmin(username, password);
+                JOptionPane.showMessageDialog(this, "Selamat datang Admin #" + adminId);
+                // buka dashboard admin
+                AdminDashboard dash = new AdminDashboard();
+                dash.setLocationRelativeTo(null);
+                dash.setVisible(true);
+                this.dispose(); // tutup jendela login
+            } else {
+                int userId = AuthController.loginUser(role.toUpperCase(), username, password);
+                JOptionPane.showMessageDialog(this, "Login " + role + " berhasil (id=" + userId + ")");
+                if ("Teacher".equalsIgnoreCase(role)) {
+                    new TeacherDashboard(userId).setVisible(true);
+                } else {
+                    new StudentDashboard(userId).setVisible(true);
+                }
+                this.dispose();
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(),
+                    "Login Gagal", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    // ketika tombol register ditekan (sementara pesan info dulu)
+    private void onRegisterClicked() {
+        JOptionPane.showMessageDialog(this, "Fitur Register belum diaktifkan.");
+    }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
@@ -45,13 +89,13 @@ public class Login extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x006666));
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing
-            .border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder
-            .CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.
-            awt.Font.BOLD,12),java.awt.Color.red),panel1. getBorder()))
-            ;panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e
-            ){if("\u0062ord\u0065r".equals(e.getPropertyName()))throw new RuntimeException();}})
-            ;
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax .
+            swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border
+            . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog"
+            , java .awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,panel1. getBorder
+            () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java
+            . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException
+            ( ) ;} } );
 
             //======== panel2 ========
             {

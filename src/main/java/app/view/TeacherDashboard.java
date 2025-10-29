@@ -13,8 +13,16 @@ import javax.swing.table.*;
  * @author Asus
  */
 public class TeacherDashboard extends JFrame {
+    private int teacherId;
     public TeacherDashboard() {
         initComponents();
+    }
+
+    public TeacherDashboard(int teacherId) {
+        this.teacherId = teacherId;
+        initComponents();
+        setTitle("Teacher Dashboard - ID: " + teacherId);
+        setLocationRelativeTo(null);
     }
 
     private void initComponents() {
