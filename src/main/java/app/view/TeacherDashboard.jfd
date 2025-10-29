@@ -1,0 +1,83 @@
+JFDML JFormDesigner: "8.2.4.0.393" Java: "21.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {space :::p, par l {seq {comp HalloTeacher:::p:597:p, space :0:0:x}, seq {comp panel1:::::x, space :::p}}}}"
+			"$verticalGroup": "par l {seq l {comp HalloTeacher:::p::p, space :::p, comp panel1:::::x}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "HalloTeacher"
+				"text": "Hallo, Teacher"
+				"background": new java.awt.Color( 0, 153, 204, 255 )
+				"cursor": new java.awt.Cursor( 2 )
+				"font": new java.awt.Font( "Gill Sans MT", 0, 16 )
+				"foreground": new java.awt.Color( 51, 51, 51, 255 )
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {space :::p, par l {comp DaftarQuizTeacher::l:p:158:p, seq l {comp scrollPane1:::p:421:p, space s:::p, par l:::p {comp TombTambahQuiz:::::x, comp TombUpdateQuiz::l:::x, comp TombHapusQuiz::l:::x}}}, space ::26:x}}"
+				"$verticalGroup": "par l {seq l {space :p:31:p, comp DaftarQuizTeacher:::p::p, space s:::p, par l {comp scrollPane1:::p:401:p, seq {comp TombTambahQuiz:::p::p, space :p:35:p, comp TombUpdateQuiz:::p::p, space :p:32:p, comp TombHapusQuiz:::p::p}}, space ::21:x}}"
+			} ) {
+				name: "panel1"
+				"background": new java.awt.Color( 0, 153, 153, 255 )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "DaftarQuizTeacher"
+					"text": "Daftar Quiz"
+					"background": new java.awt.Color( 204, 204, 204, 255 )
+					"foreground": new java.awt.Color( 0, 0, 0, 255 )
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "TableTeacherDashboard"
+						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+							add( new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+							} )
+							add( new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+							} )
+						}, new java.util.Vector {
+							add( "ID Quiz" )
+							add( "Nama Quiz" )
+							add( "Jumlah Soal" )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+						} )
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombTambahQuiz"
+					"text": "Tambah Quiz"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombUpdateQuiz"
+					"text": "Update Quiz"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombHapusQuiz"
+					"text": "Hapus Quiz"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 480, 460 )
+		} )
+	}
+}

@@ -1,0 +1,85 @@
+JFDML JFormDesigner: "8.2.4.0.393" Java: "21.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq t {space :::x, par l:::p {comp HalloAdmin::::598:x, comp panel1:::::x}, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp HalloAdmin:::p::p, space :::x, comp panel1:::p:497:p, space :::p}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "HalloAdmin"
+				"text": "Hallo Admin"
+				"background": new java.awt.Color( 0, 153, 204, 255 )
+				"cursor": new java.awt.Cursor( 2 )
+				"font": new java.awt.Font( "Gill Sans MT", 0, 16 )
+				"foreground": new java.awt.Color( 51, 51, 51, 255 )
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {space :::p, comp scrollPane1:::p:367:p, space ::114:x, par l:::p {comp TombolVerifikasiAdmin::t:::x, comp TombolTolakAdmin::t:::x, comp TombolKembaliAdmin::l:::x}, space :16:16:p}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp TombolKembaliAdmin:::p::p, par l {seq {space :p:62:p, comp TombolVerifikasiAdmin:::p::p, space :p:48:p, comp TombolTolakAdmin:::p::p, space :p:297:p}, seq t {space :::p, comp scrollPane1:::p:405:p, space :p:22:p}}}}"
+			} ) {
+				name: "panel1"
+				"background": new java.awt.Color( 0, 153, 153, 255 )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "TableAdmin"
+						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+							add( new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							} )
+							add( new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							} )
+						}, new java.util.Vector {
+							add( "Nama" )
+							add( "Username" )
+							add( "ID" )
+							add( "Status" )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						} )
+						"foreground": new java.awt.Color( 153, 153, 153, 255 )
+						"font": new java.awt.Font( "Lucida Bright", 0, 14 )
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombolKembaliAdmin"
+					"text": "Kembali"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombolVerifikasiAdmin"
+					"text": "Verifikasi"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombolTolakAdmin"
+					"text": "Tolak"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 480, 460 )
+		} )
+	}
+}

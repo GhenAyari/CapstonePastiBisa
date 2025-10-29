@@ -1,0 +1,65 @@
+JFDML JFormDesigner: "8.2.4.0.393" Java: "21.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq {space :::p, par l {seq t {space :0:0:x, comp HalloTeacher:::p:597:p}, comp panel1::l:::x}, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp HalloTeacher:::p:24:p, space :::p, comp panel1:::::x, space :::p}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "HalloTeacher"
+				"text": "Hallo, Student"
+				"background": new java.awt.Color( 0, 153, 204, 255 )
+				"cursor": new java.awt.Cursor( 2 )
+				"font": new java.awt.Font( "Gill Sans MT", 0, 16 )
+				"foreground": new java.awt.Color( 51, 51, 51, 255 )
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq {par l {seq l {space :p:16:p, comp scrollPane1:::p:499:p}, seq l {space :p:24:p, comp PilganStudentA:::p::p, space :p:29:p, comp PilganStudentB:::p::p, space :p:39:p, comp PilganStudentC:::p::p, space :p:45:p, comp PilganStudentD:::p::p, space :p:42:p, comp TombNextKerjakan:::p::p, space :p:28:p, par l:::p {comp TombKembali:::::x, comp TombKumpulkan:::::x}}}, space :::x}}"
+				"$verticalGroup": "par l {seq l {space :p:58:p, comp scrollPane1:::p:121:p, space :p:33:p, par b {comp PilganStudentA::b:p::p, comp PilganStudentB::b:p::p, comp PilganStudentC::b:p::p, comp PilganStudentD::b:p::p, comp TombNextKerjakan::b:p::p, comp TombKumpulkan::b:p::p}, space :p:33:p, comp TombKembali:::p::p, space ::190:x}}"
+			} ) {
+				name: "panel1"
+				"background": new java.awt.Color( 0, 153, 153, 255 )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "SoaKerjakanQuiz"
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JCheckBox" ) {
+					name: "PilganStudentA"
+					"text": "A"
+				} )
+				add( new FormComponent( "javax.swing.JCheckBox" ) {
+					name: "PilganStudentB"
+					"text": "B"
+				} )
+				add( new FormComponent( "javax.swing.JCheckBox" ) {
+					name: "PilganStudentC"
+					"text": "C"
+				} )
+				add( new FormComponent( "javax.swing.JCheckBox" ) {
+					name: "PilganStudentD"
+					"text": "D"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombNextKerjakan"
+					"text": "Next"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombKumpulkan"
+					"text": "Kumpulkan"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombKembali"
+					"text": "Kembali"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 480, 460 )
+		} )
+	}
+}

@@ -1,0 +1,80 @@
+JFDML JFormDesigner: "8.2.4.0.393" Java: "21.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq t {space :0:0:x, par l:::p {comp HalloTeacher::::649:x, comp panel1:::::x}}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp HalloTeacher:::p::p, space :::p, comp panel1:::::x}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "HalloTeacher"
+				"text": "Hallo, Teacher"
+				"background": new java.awt.Color( 0, 153, 204, 255 )
+				"cursor": new java.awt.Cursor( 2 )
+				"font": new java.awt.Font( "Gill Sans MT", 0, 16 )
+				"foreground": new java.awt.Color( 51, 51, 51, 255 )
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq {space :::p, par l {seq {comp MasukkanNamaQuiz:::p:230:p, space ::413:x}, seq l {comp label1:::p:163:p, space ::332:x, comp KembaliTeachTamQuiz:::p::p, space :p:62:p}, seq {par l {comp label2:::p:140:p, comp scrollPane1::l:p:479:p, seq l {par t:::p {comp SoalKeBerapa::l::0:x, comp PilganBenar::l:::x}, space s:::p, comp SimpanNext:::p::p, space s:::p, comp Simpan:::p::p, space :p:27:p, comp button3:::p::p}}, space :0:164:x}}}}"
+				"$verticalGroup": "par l {seq {space :::p, par b {comp label1::b:p::p, comp KembaliTeachTamQuiz::b:p::p}, space :p:4:p, comp MasukkanNamaQuiz:::p::p, space :::p, comp label2:::p::p, space :::p, comp scrollPane1:::p:80:p, space s:::p, par b {comp PilganBenar::b:p::p, comp SimpanNext::b:p::p, comp Simpan::b:p::p, comp button3::b:p::p}, space :p:28:p, comp SoalKeBerapa:::p::p, space ::209:x}}"
+			} ) {
+				name: "panel1"
+				"background": new java.awt.Color( 0, 153, 153, 255 )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "KembaliTeachTamQuiz"
+					"text": "Kembali"
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "MasukkanNamaQuiz"
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "Masukkan Nama Quiz"
+					"background": new java.awt.Color( 204, 204, 204, 255 )
+					"foreground": new java.awt.Color( 0, 0, 0, 255 )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "Masukkan Soal"
+					"foreground": new java.awt.Color( 0, 0, 0, 255 )
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "MasukkanSoal"
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JComboBox" ) {
+					name: "PilganBenar"
+					"model": new javax.swing.DefaultComboBoxModel {
+						selectedItem: "A"
+						addElement( "A" )
+						addElement( "B" )
+						addElement( "C" )
+						addElement( "D" )
+					}
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "SimpanNext"
+					"text": "Simpan Next"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "Simpan"
+					"text": "Simpan"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button3"
+					"text": "Kembali Soal "
+				} )
+				add( new FormComponent( "javax.swing.JSpinner" ) {
+					name: "SoalKeBerapa"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 6, 0 )
+			"size": new java.awt.Dimension( 480, 460 )
+		} )
+	}
+}

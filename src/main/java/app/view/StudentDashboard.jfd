@@ -1,0 +1,71 @@
+JFDML JFormDesigner: "8.2.4.0.393" Java: "21.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq l {space :::p, par t {comp panel1:::::x, comp HalloTeacher:::p:597:p}, space :::x}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp HalloTeacher:::p:24:p, space :::p, comp panel1:::::x}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "HalloTeacher"
+				"text": "Hallo, Student"
+				"background": new java.awt.Color( 0, 153, 204, 255 )
+				"cursor": new java.awt.Cursor( 2 )
+				"font": new java.awt.Font( "Gill Sans MT", 0, 16 )
+				"foreground": new java.awt.Color( 51, 51, 51, 255 )
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq t {space :p:21:p, comp scrollPane1:::p:380:p, space :::x, par l:::p {comp TombKerjakanQuiz:::::x, comp TombLihatSkor:::::x, comp TombKembaliDashStudent:::p:116:p}, space :p:30:p}}"
+				"$verticalGroup": "par l {seq l {par l {seq {space :p:14:p, comp TombKembaliDashStudent:::p::p, space :p:51:p, comp TombKerjakanQuiz:::p::p, space s:::p, comp TombLihatSkor:::p::p}, seq l {space :p:69:p, comp scrollPane1:::p:415:p}}, space ::17:x}}"
+			} ) {
+				name: "panel1"
+				"background": new java.awt.Color( 0, 153, 153, 255 )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "TableDashStudent"
+						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+							add( new java.util.Vector {
+								add( null )
+								add( "" )
+							} )
+							add( new java.util.Vector {
+								add( null )
+								add( null )
+							} )
+						}, new java.util.Vector {
+							add( "Nama Quiz" )
+							add( "Jumlah Soal" )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+						} )
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombKerjakanQuiz"
+					"text": "Kerjakan Quiz"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombLihatSkor"
+					"text": "Lihat Skor"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombKembaliDashStudent"
+					"text": "Kembali"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 480, 460 )
+		} )
+	}
+}

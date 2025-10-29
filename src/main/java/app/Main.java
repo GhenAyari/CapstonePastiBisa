@@ -1,4 +1,8 @@
-package app;
-
-public class Main {
-}
+//package app;
+//import app.view.LoginFrame;
+//
+//public class Main {
+//    public static void main(String[] args) {
+//        javax.swing.SwingUtilities.invokeLater(() -> new LoginFrame().setVisible(true));
+//    }
+//}
