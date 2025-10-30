@@ -3,8 +3,9 @@ package app.controller;
 import app.model.QuestionItem;
 import app.util.Database;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.List;
+import app.util.Database;
 
 public class TeacherQuizController {
 
@@ -23,5 +24,21 @@ public class TeacherQuizController {
                     it.getNumber()
             );
         }
+    }
+    // Ringkasan quiz per guru: satu baris per quiz_title
+    public static ResultSet listQuizSummary(int teacherId) throws SQLException {
+        String sql =
+                "SELECT MIN(question_id) AS quiz_id, quiz_title, COUNT(*) AS jumlah_soal " +
+                        "FROM quiz " +
+                        "WHERE teacher_id=? " +
+                        "GROUP BY quiz_title " +
+                        "ORDER BY quiz_title";
+
+        // gunakan pola yang sama seperti AdminController: kembalikan ResultSet,
+        // nanti koneksinya ditutup dari pemanggil setelah selesai dipakai
+        Connection c = Database.get();
+        PreparedStatement ps = c.prepareStatement(sql);
+        ps.setInt(1, teacherId);
+        return ps.executeQuery();
     }
 }

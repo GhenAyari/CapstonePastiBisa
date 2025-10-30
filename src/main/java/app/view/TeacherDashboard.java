@@ -8,6 +8,9 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.table.*;
+import java.sql.ResultSet;
+import javax.swing.table.DefaultTableModel;
+
 
 /**
  * @author Asus
@@ -24,12 +27,49 @@ public class TeacherDashboard extends JFrame {
         setTitle("Teacher Dashboard - ID: " + teacherId);
         setLocationRelativeTo(null);
         loadProfile();// tampilkan nama guru
+        loadQuizList();
         // === Event tombol Tambah Quiz ===
         TombTambahQuiz.addActionListener(e -> {
             new TeacherTambahQuiz(teacherId).setVisible(true); // buka form tambah quiz
             dispose(); // tutup halaman dashboard
         });
 
+        TombolKembaliDashboard.addActionListener(e -> {
+            new Login().setVisible(true); // buka form login
+            dispose(); // tutup halaman dashboard
+        });
+
+    }
+
+    private void loadQuizList() {
+        try (ResultSet rs = app.controller.TeacherQuizController.listQuizSummary(teacherId)) {
+            DefaultTableModel m = new DefaultTableModel(
+                    new Object[]{"ID Quiz", "Nama Quiz", "Jumlah Soal"}, 0
+            ) {
+                @Override public boolean isCellEditable(int r, int c) { return false; }
+            };
+
+            while (rs.next()) {
+                int id = rs.getInt("quiz_id");
+                String title = rs.getString("quiz_title");
+                int count = rs.getInt("jumlah_soal");
+                m.addRow(new Object[]{id, title, count});
+            }
+            TableTeacherDashboard.setModel(m);
+
+            // rapikan resource dari ResultSet yang kembali
+            try {
+                var st = rs.getStatement();
+                if (st != null) {
+                    var conn = st.getConnection();
+                    st.close();
+                    if (conn != null) conn.close();
+                }
+            } catch (Exception ignore) {}
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 
@@ -63,6 +103,7 @@ public class TeacherDashboard extends JFrame {
         TombTambahQuiz = new JButton();
         TombUpdateQuiz = new JButton();
         TombHapusQuiz = new JButton();
+        TombolKembaliDashboard = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -77,13 +118,11 @@ public class TeacherDashboard extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x009999));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax.
-            swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border
-            . TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog"
-            ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder
-            ( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java
-            .beans .PropertyChangeEvent e) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException
-            ( ); }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
+            0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
+            . BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
+            red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
+            beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
             //---- DaftarQuizTeacher ----
             DaftarQuizTeacher.setText("Daftar Quiz");
@@ -115,6 +154,9 @@ public class TeacherDashboard extends JFrame {
             //---- TombHapusQuiz ----
             TombHapusQuiz.setText("Hapus Quiz");
 
+            //---- TombolKembaliDashboard ----
+            TombolKembaliDashboard.setText("Kembali");
+
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
@@ -122,21 +164,26 @@ public class TeacherDashboard extends JFrame {
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(panel1Layout.createParallelGroup()
-                            .addComponent(DaftarQuizTeacher, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE)
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 421, GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TombTambahQuiz, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TombUpdateQuiz, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TombHapusQuiz, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 421, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(DaftarQuizTeacher, GroupLayout.PREFERRED_SIZE, 158, GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                            .addComponent(TombTambahQuiz, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TombUpdateQuiz, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TombHapusQuiz, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TombolKembaliDashboard, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(26, Short.MAX_VALUE))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(DaftarQuizTeacher, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(panel1Layout.createParallelGroup()
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(DaftarQuizTeacher, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                            .addGroup(panel1Layout.createSequentialGroup()
+                                .addGap(21, 21, 21)
+                                .addComponent(TombolKembaliDashboard)))
                         .addGap(18, 18, 18)
                         .addGroup(panel1Layout.createParallelGroup()
                             .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 401, GroupLayout.PREFERRED_SIZE)
@@ -186,5 +233,6 @@ public class TeacherDashboard extends JFrame {
     private JButton TombTambahQuiz;
     private JButton TombUpdateQuiz;
     private JButton TombHapusQuiz;
+    private JButton TombolKembaliDashboard;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

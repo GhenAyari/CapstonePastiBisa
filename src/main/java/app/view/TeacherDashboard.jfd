@@ -17,8 +17,8 @@ new FormModel {
 				"foreground": new java.awt.Color( 51, 51, 51, 255 )
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :::p, par l {comp DaftarQuizTeacher::l:p:158:p, seq l {comp scrollPane1:::p:421:p, space s:::p, par l:::p {comp TombTambahQuiz:::::x, comp TombUpdateQuiz::l:::x, comp TombHapusQuiz::l:::x}}}, space ::26:x}}"
-				"$verticalGroup": "par l {seq l {space :p:31:p, comp DaftarQuizTeacher:::p::p, space s:::p, par l {comp scrollPane1:::p:401:p, seq {comp TombTambahQuiz:::p::p, space :p:35:p, comp TombUpdateQuiz:::p::p, space :p:32:p, comp TombHapusQuiz:::p::p}}, space ::21:x}}"
+				"$horizontalGroup": "par l {seq l {space :::p, par l {comp scrollPane1::l:p:421:p, comp DaftarQuizTeacher::l:p:158:p}, space s:::p, par l:::p {comp TombTambahQuiz:::::x, comp TombUpdateQuiz::l:::x, comp TombHapusQuiz::l:::x, comp TombolKembaliDashboard:::::x}, space ::26:x}}"
+				"$verticalGroup": "par l {seq l {par l {seq {space :p:31:p, comp DaftarQuizTeacher:::p::p}, seq {space :p:21:p, comp TombolKembaliDashboard:::p::p}}, space s:::p, par l {comp scrollPane1:::p:401:p, seq {comp TombTambahQuiz:::p::p, space :p:35:p, comp TombUpdateQuiz:::p::p, space :p:32:p, comp TombHapusQuiz:::p::p}}, space ::21:x}}"
 			} ) {
 				name: "panel1"
 				"background": new java.awt.Color( 0, 153, 153, 255 )
@@ -73,6 +73,10 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "TombHapusQuiz"
 					"text": "Hapus Quiz"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombolKembaliDashboard"
+					"text": "Kembali"
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
