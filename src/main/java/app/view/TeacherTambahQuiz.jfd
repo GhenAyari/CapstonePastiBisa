@@ -17,13 +17,13 @@ new FormModel {
 				"foreground": new java.awt.Color( 51, 51, 51, 255 )
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::p, par l {seq {comp MasukkanNamaQuiz:::p:230:p, space ::413:x}, seq l {comp label1:::p:163:p, space ::332:x, comp KembaliTeachTamQuiz:::p::p, space :p:62:p}, seq {par l {comp label2:::p:140:p, comp scrollPane1::l:p:479:p, seq l {par t:::p {comp SoalKeBerapa::l::0:x, comp PilganBenar::l:::x}, space s:::p, comp SimpanNext:::p::p, space s:::p, comp Simpan:::p::p, space :p:27:p, comp button3:::p::p}}, space :0:164:x}}}}"
-				"$verticalGroup": "par l {seq {space :::p, par b {comp label1::b:p::p, comp KembaliTeachTamQuiz::b:p::p}, space :p:4:p, comp MasukkanNamaQuiz:::p::p, space :::p, comp label2:::p::p, space :::p, comp scrollPane1:::p:80:p, space s:::p, par b {comp PilganBenar::b:p::p, comp SimpanNext::b:p::p, comp Simpan::b:p::p, comp button3::b:p::p}, space :p:28:p, comp SoalKeBerapa:::p::p, space ::209:x}}"
+				"$horizontalGroup": "par l {seq {space :::p, par l {seq {comp MasukkanNamaQuiz:::p:230:p, space ::413:x}, seq l {comp label1:::p:163:p, space ::332:x, comp TombolKembaliTambahQuiz:::p::p, space :p:62:p}, seq {par l {comp label2:::p:140:p, comp scrollPane1::l:p:479:p, seq l {par t:::p {comp SoalKeBerapa::l::0:x, comp PilganBenar::l:::x}, space s:::p, comp SimpanNext:::p::p, space s:::p, comp Simpan:::p::p, space :p:27:p, comp button3:::p::p}}, space :0:164:x}}}}"
+				"$verticalGroup": "par l {seq {space :::p, par b {comp label1::b:p::p, comp TombolKembaliTambahQuiz::b:p::p}, space :p:4:p, comp MasukkanNamaQuiz:::p::p, space :::p, comp label2:::p::p, space :::p, comp scrollPane1:::p:80:p, space s:::p, par b {comp PilganBenar::b:p::p, comp SimpanNext::b:p::p, comp Simpan::b:p::p, comp button3::b:p::p}, space :p:28:p, comp SoalKeBerapa:::p::p, space ::209:x}}"
 			} ) {
 				name: "panel1"
 				"background": new java.awt.Color( 0, 153, 153, 255 )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "KembaliTeachTamQuiz"
+					name: "TombolKembaliTambahQuiz"
 					"text": "Kembali"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
