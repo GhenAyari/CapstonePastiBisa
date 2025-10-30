@@ -12,6 +12,28 @@ public class AuthController {
             throw e;
         }
     }
+    public static void registerTeacher(String name, String username, String password) throws Exception {
+        String sql = "INSERT INTO teacher (name, username, password, is_verified) VALUES (?,?,?,FALSE)";
+        try {
+            Database.execUpdate(sql, name, username, password);
+        } catch (SQLException e) {
+            if (e.getMessage().toLowerCase().contains("duplicate")) {
+                throw new Exception("Username sudah dipakai");
+            }
+            throw e;
+        }
+    }
+    public static void registerStudent(String name, String username, String password) throws Exception {
+        String sql = "INSERT INTO student (name, username, password, is_verified) VALUES (?,?,?,FALSE)";
+        try {
+            Database.execUpdate(sql, name, username, password);
+        } catch (SQLException e) {
+            if (e.getMessage().toLowerCase().contains("duplicate")) {
+                throw new Exception("Username sudah dipakai");
+            }
+            throw e;
+        }
+    }
 
     public static int loginAdmin(String username, String password) throws Exception {
         String sql = "SELECT id_admin FROM admin WHERE username=? AND password=?";

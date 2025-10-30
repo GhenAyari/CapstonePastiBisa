@@ -8,6 +8,14 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.table.*;
+import app.controller.AuthController;
+import app.view.AdminDashboard;
+import app.view.Login;
+import app.controller.AdminController;
+import javax.swing.table.DefaultTableModel;
+import java.sql.ResultSet;
+
+
 
 /**
  * @author Asus
@@ -15,7 +23,60 @@ import javax.swing.table.*;
 public class AdminDashboard extends JFrame {
     public AdminDashboard() {
         initComponents();
+        setTitle("Hallo Admin");
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        setLocationRelativeTo(null);
+
+        TombolKembaliAdmin.addActionListener(e -> {
+            new Login().setVisible(true); // buka halaman login
+            dispose(); // tutup halaman admin
+        });
+        TombolVerifikasiAdmin.addActionListener(e -> verifySelected(true));
+        TombolTolakAdmin.addActionListener(e -> verifySelected(false));
+        loadPending();
     }
+
+    private void loadPending() {
+        try (var rs = AdminController.listPendingAll()) {
+            var m = new javax.swing.table.DefaultTableModel(
+                    new Object[]{"Nama", "Username", "ID", "Status"}, 0
+            ){ @Override public boolean isCellEditable(int r,int c){ return false; }};
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");      // <-- pakai name
+                String uname = rs.getString("username"); // <-- pakai username
+                String role = rs.getString("role");
+                m.addRow(new Object[]{name, uname, id, role});
+            }
+            TableAdmin.setModel(m);
+            try { var st=rs.getStatement(); if(st!=null){ var c=st.getConnection(); st.close(); if(c!=null)c.close(); } } catch(Exception ignore){}
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
+    // ambil baris terpilih lalu approve/reject
+    private void verifySelected(boolean approve) {
+        int row = TableAdmin.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Pilih data di tabel terlebih dahulu.");
+            return;
+        }
+        int id = (int) TableAdmin.getValueAt(row, 2);           // kolom ID
+        String role = TableAdmin.getValueAt(row, 3).toString();  // kolom Status berisi role
+
+        try {
+            AdminController.verify(role, id, approve);
+            loadPending(); // refresh tabel
+            JOptionPane.showMessageDialog(this,
+                    approve ? "Berhasil diverifikasi." : "Berhasil ditolak/hapus.");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
@@ -41,12 +102,11 @@ public class AdminDashboard extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x009999));
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border
-            .EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER,javax
-            .swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,
-            12),java.awt.Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans
-            .PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.
-            getPropertyName()))throw new RuntimeException();}});
+            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder(
+            0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER,javax.swing.border.TitledBorder
+            .BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt.Color.
+            red),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java.
+            beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName()))throw new RuntimeException();}});
 
             //======== scrollPane1 ========
             {

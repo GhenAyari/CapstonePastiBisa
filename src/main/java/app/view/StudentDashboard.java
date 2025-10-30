@@ -8,14 +8,50 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.table.*;
+import java.sql.*; // <--- ini penting (untuk Connection, PreparedStatement, ResultSet)
+import app.util.Database; // <--- ini juga penting (untuk Database.get())
 
 /**
  * @author Asus
  */
 public class StudentDashboard extends JFrame {
+    private int studentId;
+
     public StudentDashboard() {
         initComponents();
     }
+
+    public StudentDashboard(int studentId) {
+        this.studentId = studentId;
+        initComponents();
+        setTitle("Student Dashboard - ID: " + studentId);
+        setLocationRelativeTo(null);
+        loadProfile();
+        // === Tambahkan ini ===
+        TombKembaliDashStudent.addActionListener(e -> {
+            new Login().setVisible(true);  // buka halaman login lagi
+            dispose();                     // tutup halaman student
+        });
+    }
+
+    private void loadProfile() {
+        try (var c = Database.get();
+             var ps = c.prepareStatement("SELECT name, username FROM student WHERE users_id=?")) {
+            ps.setInt(1, studentId);
+            try (var rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String name = rs.getString("name");
+                    String uname = rs.getString("username");
+                    setTitle("Student: " + name + " (" + uname + ")");
+                    // kalau punya JLabel info, set di sini
+                    // lblStudentInfo.setText("Halo, " + name + " (" + uname + ")");
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
@@ -41,12 +77,13 @@ public class StudentDashboard extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x009999));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border
-            . EmptyBorder( 0, 0, 0, 0) , "JF\u006frm\u0044es\u0069gn\u0065r \u0045va\u006cua\u0074io\u006e", javax. swing. border. TitledBorder. CENTER, javax
-            . swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069al\u006fg" ,java .awt .Font .BOLD ,
-            12 ), java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans
-            . PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062or\u0064er" .equals (e .
-            getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax
+            . swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing
+            . border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .
+            Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red
+            ) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override
+            public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName (
+            ) )) throw new RuntimeException( ); }} );
 
             //======== scrollPane1 ========
             {

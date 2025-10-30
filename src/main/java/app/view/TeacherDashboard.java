@@ -18,12 +18,39 @@ public class TeacherDashboard extends JFrame {
         initComponents();
     }
 
-    public TeacherDashboard(int teacherId) {
+    public TeacherDashboard(int teacherId) {   // konstruktor yang dipakai saat login
         this.teacherId = teacherId;
         initComponents();
         setTitle("Teacher Dashboard - ID: " + teacherId);
         setLocationRelativeTo(null);
+        loadProfile();// tampilkan nama guru
+        // === Event tombol Tambah Quiz ===
+        TombTambahQuiz.addActionListener(e -> {
+            new TeacherTambahQuiz(teacherId).setVisible(true); // buka form tambah quiz
+            dispose(); // tutup halaman dashboard
+        });
+
     }
+
+
+    private void loadProfile() {
+        try (var c = app.util.Database.get();
+             var ps = c.prepareStatement("SELECT name, username FROM teacher WHERE users_id=?")) {
+            ps.setInt(1, teacherId);
+            try (var rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String name = rs.getString("name");
+                    String uname = rs.getString("username");
+                    setTitle("Teacher: " + name + " (" + uname + ")");
+                    // kalau kamu punya JLabel, bisa juga begini:
+                    // lblTeacherInfo.setText("Selamat datang, " + name);
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
@@ -50,12 +77,13 @@ public class TeacherDashboard extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x009999));
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border.EmptyBorder
-            (0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border.TitledBorder.CENTER,javax.swing.border
-            .TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog",java.awt.Font.BOLD,12),java.awt
-            .Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void
-            propertyChange(java.beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName()))throw new RuntimeException()
-            ;}});
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new
+            javax. swing. border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax
+            . swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM, new java
+            .awt .Font ("D\u0069alog" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans.
+            PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062order" .
+            equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
             //---- DaftarQuizTeacher ----
             DaftarQuizTeacher.setText("Daftar Quiz");

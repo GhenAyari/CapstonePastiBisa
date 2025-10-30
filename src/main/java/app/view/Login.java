@@ -24,39 +24,75 @@ public class Login extends JFrame {
         TombRegister.addActionListener(e -> onRegisterClicked());
     }
 
+
     private void onLoginClicked() {
-        String role = (String) TombRole.getSelectedItem();
+        String role = (String) TombRole.getSelectedItem();   // Admin / Teacher / Student
         String username = InputUsernameLogin.getText().trim();
         String password = InputPasswordLogin.getText().trim();
 
         try {
             if ("Admin".equalsIgnoreCase(role)) {
-                int adminId = AuthController.loginAdmin(username, password);
+                int adminId = app.controller.AuthController.loginAdmin(username, password);
                 JOptionPane.showMessageDialog(this, "Selamat datang Admin #" + adminId);
-                // buka dashboard admin
-                AdminDashboard dash = new AdminDashboard();
-                dash.setLocationRelativeTo(null);
-                dash.setVisible(true);
-                this.dispose(); // tutup jendela login
-            } else {
-                int userId = AuthController.loginUser(role.toUpperCase(), username, password);
-                JOptionPane.showMessageDialog(this, "Login " + role + " berhasil (id=" + userId + ")");
-                if ("Teacher".equalsIgnoreCase(role)) {
-                    new TeacherDashboard(userId).setVisible(true);
-                } else {
-                    new StudentDashboard(userId).setVisible(true);
-                }
-                this.dispose();
+                new app.view.AdminDashboard().setVisible(true);
+                dispose();
+                return;
             }
+
+            if ("Teacher".equalsIgnoreCase(role)) {
+                int userId = app.controller.AuthController.loginUser("TEACHER", username, password);
+                JOptionPane.showMessageDialog(this, "Login Teacher berhasil (id=" + userId + ")");
+                new app.view.TeacherDashboard(userId).setVisible(true);
+                dispose();
+                return;
+            }
+            if ("Student".equalsIgnoreCase(role)) {
+                int userId = app.controller.AuthController.loginUser("STUDENT", username, password);
+                JOptionPane.showMessageDialog(this, "Login Student berhasil (id=" + userId + ")");
+                new app.view.StudentDashboard(userId).setVisible(true);
+                dispose();
+                return;
+            }
+
+
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(),
-                    "Login Gagal", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Login Gagal", JOptionPane.ERROR_MESSAGE);
         }
     }
 
     // ketika tombol register ditekan (sementara pesan info dulu)
     private void onRegisterClicked() {
-        JOptionPane.showMessageDialog(this, "Fitur Register belum diaktifkan.");
+        String role = (String) TombRole.getSelectedItem();     // Admin / Teacher / Student
+        String name = InputNamaLogin.getText().trim();
+        String username = InputUsernameLogin.getText().trim();
+        String password = InputPasswordLogin.getText().trim();
+
+        try {
+            if ("Admin".equalsIgnoreCase(role)) {
+                JOptionPane.showMessageDialog(this, "Admin tidak bisa registrasi di sini.");
+                return;
+            }
+            if (name.isEmpty() || username.isEmpty() || password.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Nama, username, dan password wajib diisi.");
+                return;
+            }
+
+            if ("Teacher".equalsIgnoreCase(role)) {
+                AuthController.registerTeacher(name, username, password);
+            } else {
+                // kalau nanti mau aktifkan student, ini sudah siap
+                AuthController.registerStudent(name, username, password);
+            }
+
+            JOptionPane.showMessageDialog(this, "Registrasi berhasil. Menunggu verifikasi admin.");
+            // optional: kosongkan field
+            InputNamaLogin.setText("");
+            InputUsernameLogin.setText("");
+            InputPasswordLogin.setText("");
+
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 
@@ -89,13 +125,12 @@ public class Login extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x006666));
-            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax .
-            swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border
-            . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog"
-            , java .awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,panel1. getBorder
-            () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java
-            . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException
-            ( ) ;} } );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
+            ( 0, 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing. border
+            . TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
+            propertyChange (java .beans .PropertyChangeEvent e) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
+            ; }} );
 
             //======== panel2 ========
             {
