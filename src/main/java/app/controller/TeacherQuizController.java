@@ -41,4 +41,9 @@ public class TeacherQuizController {
         ps.setInt(1, teacherId);
         return ps.executeQuery();
     }
+    public static int deleteQuizByTitle(int teacherId, String quizTitle) throws SQLException {
+        String sql = "DELETE FROM quiz WHERE teacher_id=? AND quiz_title=?";
+        // mengembalikan jumlah baris yang terhapus
+        return Database.execUpdate(sql, teacherId, quizTitle);
+    }
 }

@@ -125,13 +125,13 @@ public class Login extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x006666));
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.
-            swing.border.EmptyBorder(0,0,0,0), "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn",javax.swing.border
-            .TitledBorder.CENTER,javax.swing.border.TitledBorder.BOTTOM,new java.awt.Font("Dia\u006cog"
-            ,java.awt.Font.BOLD,12),java.awt.Color.red),panel1. getBorder
-            ()));panel1. addPropertyChangeListener(new java.beans.PropertyChangeListener(){@Override public void propertyChange(java
-            .beans.PropertyChangeEvent e){if("\u0062ord\u0065r".equals(e.getPropertyName()))throw new RuntimeException
-            ();}});
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
+            . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder
+            . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .
+            awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder( )) )
+            ; panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+            ) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
+            ;
 
             //======== panel2 ========
             {
@@ -181,19 +181,22 @@ public class Login extends JFrame {
                         .addGroup(panel2Layout.createSequentialGroup()
                             .addContainerGap()
                             .addGroup(panel2Layout.createParallelGroup()
-                                .addComponent(label1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(InputUsernameLogin, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(label2, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(InputNamaLogin, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(label3, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(InputPasswordLogin, GroupLayout.PREFERRED_SIZE, 259, GroupLayout.PREFERRED_SIZE)
+                                .addGroup(panel2Layout.createSequentialGroup()
+                                    .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(label1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(label2, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(label3, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(InputUsernameLogin, GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                                        .addComponent(InputNamaLogin)
+                                        .addComponent(InputPasswordLogin))
+                                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(panel2Layout.createSequentialGroup()
                                     .addComponent(TombLogin)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(TombRegister)
-                                    .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(TombRole, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-                            .addContainerGap(30, Short.MAX_VALUE))
+                                    .addComponent(TombRegister, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(TombRole, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(43, 43, 43))))
                 );
                 panel2Layout.setVerticalGroup(
                     panel2Layout.createParallelGroup()
@@ -215,7 +218,7 @@ public class Login extends JFrame {
                                 .addComponent(TombLogin)
                                 .addComponent(TombRegister)
                                 .addComponent(TombRole, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap(60, Short.MAX_VALUE))
+                            .addContainerGap(151, Short.MAX_VALUE))
                 );
             }
 
@@ -223,17 +226,17 @@ public class Login extends JFrame {
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
-                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                        .addContainerGap(124, Short.MAX_VALUE)
+                    .addGroup(panel1Layout.createSequentialGroup()
+                        .addGap(124, 124, 124)
                         .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addGap(138, 138, 138))
+                        .addContainerGap(230, Short.MAX_VALUE))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                        .addGap(49, 49, 49)
                         .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(150, Short.MAX_VALUE))
+                        .addContainerGap(143, Short.MAX_VALUE))
             );
         }
 
@@ -241,11 +244,8 @@ public class Login extends JFrame {
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(SelamatDatangLogin, GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap())
+                .addComponent(SelamatDatangLogin, GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE)
+                .addComponent(panel1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
             contentPaneLayout.createParallelGroup()

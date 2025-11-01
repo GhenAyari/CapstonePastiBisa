@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq t {space :::x, par l:::p {comp HalloAdmin::::598:x, comp panel1:::::x}, space :::p}}"
-			"$verticalGroup": "par l {seq l {space :::p, comp HalloAdmin:::p::p, space :::x, comp panel1:::p:497:p, space :::p}}"
+			"$horizontalGroup": "par l {seq t {par l {comp HalloAdmin::::854:x, comp panel1:::::x}, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp HalloAdmin:::p::p, space :::x, comp panel1:::p::p, space :::p}}"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JTextField" ) {
@@ -17,8 +17,8 @@ new FormModel {
 				"foreground": new java.awt.Color( 51, 51, 51, 255 )
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :::p, comp scrollPane1:::p:367:p, space ::114:x, par l:::p {comp TombolVerifikasiAdmin::t:::x, comp TombolTolakAdmin::t:::x, comp TombolKembaliAdmin::l:::x}, space :16:16:p}}"
-				"$verticalGroup": "par l {seq l {space :::p, comp TombolKembaliAdmin:::p::p, par l {seq {space :p:62:p, comp TombolVerifikasiAdmin:::p::p, space :p:48:p, comp TombolTolakAdmin:::p::p, space :p:297:p}, seq t {space :::p, comp scrollPane1:::p:405:p, space :p:22:p}}}}"
+				"$horizontalGroup": "par l {seq l {space :::p, comp scrollPane1:::p:506:p, space ::231:x, par l:::p {comp TombolVerifikasiAdmin::t:::x, comp TombolTolakAdmin::t:::x, comp TombolKembaliAdmin::l:::x}, space :16:16:p}}"
+				"$verticalGroup": "par l {seq l {space :::p, comp TombolKembaliAdmin:::p::p, par l {seq {space :p:62:p, comp TombolVerifikasiAdmin:::p::p, space :p:48:p, comp TombolTolakAdmin:::p::p}, seq l {space :p:40:p, comp scrollPane1:::p:450:p}}, space ::48:x}}"
 			} ) {
 				name: "panel1"
 				"background": new java.awt.Color( 0, 153, 153, 255 )
@@ -79,7 +79,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 480, 460 )
+			"size": new java.awt.Dimension( 690, 520 )
 		} )
 	}
 }

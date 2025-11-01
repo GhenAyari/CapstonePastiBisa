@@ -28,6 +28,7 @@ public class TeacherDashboard extends JFrame {
         setLocationRelativeTo(null);
         loadProfile();// tampilkan nama guru
         loadQuizList();
+//        onDeleteQuiz();
         // === Event tombol Tambah Quiz ===
         TombTambahQuiz.addActionListener(e -> {
             new TeacherTambahQuiz(teacherId).setVisible(true); // buka form tambah quiz
@@ -38,8 +39,10 @@ public class TeacherDashboard extends JFrame {
             new Login().setVisible(true); // buka form login
             dispose(); // tutup halaman dashboard
         });
+        TombHapusQuiz.addActionListener(e -> onDeleteQuiz());
 
     }
+
 
     private void loadQuizList() {
         try (ResultSet rs = app.controller.TeacherQuizController.listQuizSummary(teacherId)) {
@@ -91,6 +94,37 @@ public class TeacherDashboard extends JFrame {
         }
     }
 
+    // ===================== HAPUS QUIZ ======================
+    private void onDeleteQuiz() {
+        int row = TableTeacherDashboard.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Pilih satu quiz di tabel dulu.");
+            return;
+        }
+
+        // kolom: 0=ID Quiz, 1=Nama Quiz, 2=Jumlah Soal
+        String quizTitle = TableTeacherDashboard.getValueAt(row, 1).toString();
+        int count        = Integer.parseInt(TableTeacherDashboard.getValueAt(row, 2).toString());
+
+        int ok = JOptionPane.showConfirmDialog(
+                this,
+                "Hapus quiz \"" + quizTitle + "\" beserta " + count + " soal?",
+                "Konfirmasi Hapus",
+                JOptionPane.YES_NO_OPTION
+        );
+        if (ok != JOptionPane.YES_OPTION) return;
+
+        try {
+            int deleted = app.controller.TeacherQuizController
+                    .deleteQuizByTitle(teacherId, quizTitle);
+            loadQuizList(); // refresh tabel
+            JOptionPane.showMessageDialog(this,
+                    "Terhapus: " + deleted + " baris soal untuk \"" + quizTitle + "\".");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Gagal hapus", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
@@ -118,11 +152,12 @@ public class TeacherDashboard extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x009999));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder(
-            0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder
-            . BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color.
-            red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .
-            beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder
+            ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border
+            .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt
+            . Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void
+            propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( )
+            ;} } );
 
             //---- DaftarQuizTeacher ----
             DaftarQuizTeacher.setText("Daftar Quiz");
