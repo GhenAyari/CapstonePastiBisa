@@ -4,13 +4,60 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {space :0:773:x}"
-			"$verticalGroup": "par l {space :0:581:x}"
+			"$horizontalGroup": "par l {seq t {space :::x, comp HalloStudentFeedback:::p:854:p, space :::p}, seq l {space :::p, comp panel1:::p::p, space :::x}}"
+			"$verticalGroup": "par l {seq l {comp HalloStudentFeedback:::p::p, space :::p, comp panel1:::::x, space :::p}}"
 		} ) {
 			name: "this"
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "HalloStudentFeedback"
+				"text": "Hallo Student"
+				"background": new java.awt.Color( 0, 153, 204, 255 )
+				"cursor": new java.awt.Cursor( 2 )
+				"font": new java.awt.Font( "Gill Sans MT", 0, 16 )
+				"foreground": new java.awt.Color( 51, 51, 51, 255 )
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {space :p:36:p, comp scrollPane1:::p:470:p, space :p:64:p, comp TombolKembaliFeedback:::p::p, space ::137:x}}"
+				"$verticalGroup": "par l {seq l {space :p:89:p, par l {comp TombolKembaliFeedback:::p::p, comp scrollPane1:::p:384:p}, space ::66:x}}"
+			} ) {
+				name: "panel1"
+				"background": new java.awt.Color( 0, 102, 102, 255 )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "table1"
+						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+							add( new java.util.Vector {
+								add( null )
+								add( null )
+							} )
+							add( new java.util.Vector {
+								add( null )
+								add( null )
+							} )
+						}, new java.util.Vector {
+							add( "Id Feedback" )
+							add( "Pesan" )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+						} )
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombolKembaliFeedback"
+					"text": "Kembali"
+				} )
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 6, 0 )
-			"size": new java.awt.Dimension( 620, 495 )
+			"size": new java.awt.Dimension( 634, 495 )
 		} )
 	}
 }

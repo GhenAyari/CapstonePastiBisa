@@ -4,13 +4,84 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {space :0:400:x}"
-			"$verticalGroup": "par l {space :0:300:x}"
+			"$horizontalGroup": "par l {seq t {par t {comp panel1::l:::x, comp HalloTeacher::::804:x}, space :::p}}"
+			"$verticalGroup": "par l {seq l {space :::p, comp HalloTeacher:::p:24:p, space :::p, comp panel1:::::x}}"
 		} ) {
 			name: "this"
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "HalloTeacher"
+				"text": "Hallo, Student"
+				"background": new java.awt.Color( 0, 153, 204, 255 )
+				"cursor": new java.awt.Cursor( 2 )
+				"font": new java.awt.Font( "Gill Sans MT", 0, 16 )
+				"foreground": new java.awt.Color( 51, 51, 51, 255 )
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {space :p:21:p, comp scrollPane1:::p:500:p, space :p:56:p, comp TombolKembaliRapor:::p:112:p, space ::115:x}}"
+				"$verticalGroup": "par l {seq l {space :p:67:p, par l {comp scrollPane1:::p:360:p, comp TombolKembaliRapor:::p::p}, space ::61:x}}"
+			} ) {
+				name: "panel1"
+				"background": new java.awt.Color( 0, 153, 153, 255 )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "TableRapor"
+						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+							add( new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							} )
+							add( new java.util.Vector {
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+								add( null )
+							} )
+						}, new java.util.Vector {
+							add( "Id Rapor" )
+							add( "Quiz ID" )
+							add( "Is Incorrect" )
+							add( "Is Correct" )
+							add( "Total Scores" )
+							add( "Date" )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+							add( null )
+						} )
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombolKembaliRapor"
+					"text": "Kembali"
+				} )
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 300 )
+			"size": new java.awt.Dimension( 650, 450 )
 		} )
 	}
 }
