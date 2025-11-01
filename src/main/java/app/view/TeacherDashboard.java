@@ -11,7 +11,7 @@ import javax.swing.*;
 import javax.swing.GroupLayout;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
-
+import java.sql.*;
 
 /**
  * @author Asus
@@ -46,32 +46,35 @@ public class TeacherDashboard extends JFrame {
 
 
     private void loadQuizList() {
-        try (ResultSet rs = controller.listQuizSummary(teacherId)) {
-            DefaultTableModel m = new DefaultTableModel(
-                    new Object[]{"ID Quiz", "Nama Quiz", "Jumlah Soal"}, 0
-            ) {
-                @Override public boolean isCellEditable(int r, int c) { return false; }
-            };
+        // Karena tabel quiz digabung (satu baris = satu soal), kita rangkum per judul quiz:
+        // MIN(question_id) hanya dipakai sebagai "ID Quiz" representatif untuk ditampilkan.
+        final String sql =
+                "SELECT MIN(question_id) AS quiz_id, quiz_title, COUNT(*) AS jumlah_soal " +
+                        "FROM quiz WHERE teacher_id=? " +
+                        "GROUP BY quiz_title " +
+                        "ORDER BY quiz_title";
 
-            while (rs.next()) {
-                int id = rs.getInt("quiz_id");
-                String title = rs.getString("quiz_title");
-                int count = rs.getInt("jumlah_soal");
-                m.addRow(new Object[]{id, title, count});
-            }
-            TableTeacherDashboard.setModel(m);
+        try (Connection conn = DatabaseConnection.get();              // <-- get(), bukan getConnection()
+             PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            // rapikan resource dari ResultSet yang kembali
-            try {
-                var st = rs.getStatement();
-                if (st != null) {
-                    var conn = st.getConnection();
-                    st.close();
-                    if (conn != null) conn.close();
+            ps.setInt(1, teacherId);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                DefaultTableModel model = new DefaultTableModel(
+                        new Object[]{"ID Quiz", "Nama Quiz", "Jumlah Soal"}, 0) {
+                    @Override public boolean isCellEditable(int r, int c) { return false; }
+                };
+
+                while (rs.next()) {
+                    int id = rs.getInt("quiz_id");
+                    String title = rs.getString("quiz_title");
+                    int count = rs.getInt("jumlah_soal");
+                    model.addRow(new Object[]{id, title, count});
                 }
-            } catch (Exception ignore) {}
 
-        } catch (Exception ex) {
+                TableTeacherDashboard.setModel(model);
+            }
+        } catch (SQLException ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
@@ -103,9 +106,8 @@ public class TeacherDashboard extends JFrame {
             return;
         }
 
-        // kolom: 0=ID Quiz, 1=Nama Quiz, 2=Jumlah Soal
         String quizTitle = TableTeacherDashboard.getValueAt(row, 1).toString();
-        int count        = Integer.parseInt(TableTeacherDashboard.getValueAt(row, 2).toString());
+        int count = Integer.parseInt(TableTeacherDashboard.getValueAt(row, 2).toString());
 
         int ok = JOptionPane.showConfirmDialog(
                 this,
@@ -117,13 +119,20 @@ public class TeacherDashboard extends JFrame {
 
         try {
             int deleted = controller.deleteQuizByTitle(teacherId, quizTitle);
-            loadQuizList(); // refresh tabel
             JOptionPane.showMessageDialog(this,
                     "Terhapus: " + deleted + " baris soal untuk \"" + quizTitle + "\".");
+
+            // 🔁 panggil refresh tabel setelah transaksi selesai
+            SwingUtilities.invokeLater(() -> {
+                loadQuizList();
+            });
+
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, ex.getMessage(), "Gagal hapus", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+
 
 
     private void initComponents() {

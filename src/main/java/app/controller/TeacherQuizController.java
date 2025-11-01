@@ -43,9 +43,42 @@ public class TeacherQuizController extends BaseController {
         ps.setInt(1, teacherId);
         return execPreparedStatement(ps);
     }
-    public int deleteQuizByTitle(int teacherId, String quizTitle) throws SQLException {
-        String sql = "DELETE FROM quiz WHERE teacher_id=? AND quiz_title=?";
-        // mengembalikan jumlah baris yang terhapus
-        return execUpdate(sql, teacherId, quizTitle);
+    public int deleteQuizByTitle(int teacherId, String quizTitle) throws Exception {
+        String delRapor =
+                "DELETE FROM rapor WHERE quiz_id IN (" +
+                        "   SELECT q.question_id FROM quiz q WHERE q.teacher_id=? AND q.quiz_title=?" +
+                        ")";
+
+        String delQuiz =
+                "DELETE FROM quiz WHERE teacher_id=? AND quiz_title=?";
+
+        try (Connection conn = DatabaseConnection.get()) {
+            conn.setAutoCommit(false);
+            int deletedRapor, deletedQuiz;
+
+            try (var ps1 = conn.prepareStatement(delRapor);
+                 var ps2 = conn.prepareStatement(delQuiz)) {
+
+                // hapus rapor terkait
+                ps1.setInt(1, teacherId);
+                ps1.setString(2, quizTitle);
+                deletedRapor = ps1.executeUpdate();
+
+                // hapus baris quiz (semua soal di judul tersebut)
+                ps2.setInt(1, teacherId);
+                ps2.setString(2, quizTitle);
+                deletedQuiz = ps2.executeUpdate();
+
+                conn.commit();
+            } catch (Exception e) {
+                try { conn.rollback(); } catch (Exception ignore) {}
+                throw e;
+            } finally {
+                try { conn.setAutoCommit(true); } catch (Exception ignore) {}
+            }
+
+            // kembalikan berapa baris quiz yang terhapus (bukan rapor)
+            return deletedQuiz;
+        }
     }
 }
