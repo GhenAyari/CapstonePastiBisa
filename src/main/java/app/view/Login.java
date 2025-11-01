@@ -4,15 +4,15 @@
 
 package app.view;
 
+
 import app.controller.AuthController;
 
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * @author Asus
- */
+
 public class Login extends JFrame {
+    private final AuthController controller = new AuthController();
     public Login() {
         initComponents();
         wireEvents();
@@ -29,6 +29,13 @@ public class Login extends JFrame {
         String role = (String) TombRole.getSelectedItem();   // Admin / Teacher / Student
         String username = InputUsernameLogin.getText().trim();
         String password = InputPasswordLogin.getText().trim();
+
+        if (username.isEmpty() || password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username dan password wajib diisi.",
+                    "Validasi", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
 
         try {
             if ("Admin".equalsIgnoreCase(role)) {
@@ -125,13 +132,13 @@ public class Login extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x006666));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
-            . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder
-            . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .
-            awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder( )) )
-            ; panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-            ) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
-            ;
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new
+            javax . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax
+            . swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java
+            . awt .Font ( "D\u0069alog", java .awt . Font. BOLD ,12 ) ,java . awt
+            . Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .
+            PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062order" .
+            equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
 
             //======== panel2 ========
             {
@@ -274,6 +281,5 @@ public class Login extends JFrame {
     private JButton TombLogin;
     private JButton TombRegister;
     private JComboBox<String> TombRole;
-    private AuthController controller = new AuthController();
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
