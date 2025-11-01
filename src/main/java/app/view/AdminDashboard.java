@@ -7,14 +7,9 @@ package app.view;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
-import javax.swing.table.*;
-import app.controller.AuthController;
-import app.view.AdminDashboard;
-import app.view.Login;
+
 import app.controller.AdminController;
 import javax.swing.table.DefaultTableModel;
-import java.sql.ResultSet;
-
 
 
 /**
@@ -37,7 +32,7 @@ public class AdminDashboard extends JFrame {
     }
 
     private void loadPending() {
-        try (var rs = AdminController.listPendingAll()) {
+        try (var rs = controller.listPendingAll()) {
             var m = new javax.swing.table.DefaultTableModel(
                     new Object[]{"Nama", "Username", "ID", "Status"}, 0
             ){ @Override public boolean isCellEditable(int r,int c){ return false; }};
@@ -68,7 +63,7 @@ public class AdminDashboard extends JFrame {
         String role = TableAdmin.getValueAt(row, 3).toString();  // kolom Status berisi role
 
         try {
-            AdminController.verify(role, id, approve);
+            controller.verify(role, id, approve);
             loadPending(); // refresh tabel
             JOptionPane.showMessageDialog(this,
                     approve ? "Berhasil diverifikasi." : "Berhasil ditolak/hapus.");
@@ -200,5 +195,6 @@ public class AdminDashboard extends JFrame {
     private JButton TombolKembaliAdmin;
     private JButton TombolVerifikasiAdmin;
     private JButton TombolTolakAdmin;
+    private AdminController controller = new AdminController();
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

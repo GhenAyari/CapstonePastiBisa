@@ -4,10 +4,11 @@
 
 package app.view;
 
+import app.controller.TeacherQuizController;
+import app.utilities.data.DatabaseConnection;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
-import javax.swing.table.*;
 import java.sql.ResultSet;
 import javax.swing.table.DefaultTableModel;
 
@@ -45,7 +46,7 @@ public class TeacherDashboard extends JFrame {
 
 
     private void loadQuizList() {
-        try (ResultSet rs = app.controller.TeacherQuizController.listQuizSummary(teacherId)) {
+        try (ResultSet rs = controller.listQuizSummary(teacherId)) {
             DefaultTableModel m = new DefaultTableModel(
                     new Object[]{"ID Quiz", "Nama Quiz", "Jumlah Soal"}, 0
             ) {
@@ -77,7 +78,7 @@ public class TeacherDashboard extends JFrame {
 
 
     private void loadProfile() {
-        try (var c = app.util.Database.get();
+        try (var c = DatabaseConnection.get();
              var ps = c.prepareStatement("SELECT name, username FROM teacher WHERE users_id=?")) {
             ps.setInt(1, teacherId);
             try (var rs = ps.executeQuery()) {
@@ -115,8 +116,7 @@ public class TeacherDashboard extends JFrame {
         if (ok != JOptionPane.YES_OPTION) return;
 
         try {
-            int deleted = app.controller.TeacherQuizController
-                    .deleteQuizByTitle(teacherId, quizTitle);
+            int deleted = controller.deleteQuizByTitle(teacherId, quizTitle);
             loadQuizList(); // refresh tabel
             JOptionPane.showMessageDialog(this,
                     "Terhapus: " + deleted + " baris soal untuk \"" + quizTitle + "\".");
@@ -269,5 +269,6 @@ public class TeacherDashboard extends JFrame {
     private JButton TombUpdateQuiz;
     private JButton TombHapusQuiz;
     private JButton TombolKembaliDashboard;
+    private TeacherQuizController controller = new TeacherQuizController();
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

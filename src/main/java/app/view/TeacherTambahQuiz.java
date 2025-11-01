@@ -6,8 +6,6 @@ package app.view;
 // imports yang dibutuhkan
 import app.controller.TeacherQuizController;
 import app.model.QuestionItem;
-import app.view.TeacherDashboard;
-import app.util.Database; // tidak dipakai langsung di file ini, tapi aman
 
 import java.awt.*;
 import javax.swing.*;
@@ -153,7 +151,7 @@ public class TeacherTambahQuiz extends JFrame {
             List<QuestionItem> items = new ArrayList<>(buffer.values());
             items.sort(java.util.Comparator.comparingInt(QuestionItem::getNumber));
 
-            TeacherQuizController.saveBatch(teacherId, quizTitle, items);
+            controller.saveBatch(teacherId, quizTitle, items);
             JOptionPane.showMessageDialog(this,
                     "Quiz \"" + quizTitle + "\" tersimpan dengan " + items.size() + " soal.");
 
@@ -336,5 +334,6 @@ public class TeacherTambahQuiz extends JFrame {
     private JButton Simpan;
     private JButton button3;
     private JSpinner SoalKeBerapa;
+    private TeacherQuizController controller = new TeacherQuizController();
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

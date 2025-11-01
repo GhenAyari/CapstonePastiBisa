@@ -1,12 +1,12 @@
-package app.util;
+package app.utilities.data;
 import java.sql.*;
 
-public final class Database {
+public final class DatabaseConnection {
     private static final String URL = "jdbc:mysql://localhost:3306/quiz_bisaaa?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root"; // Laragon default
     private static final String PASS = "";     // Laragon default kosong; sesuaikan
 
-    private Database() {}
+    private DatabaseConnection() {}
 
     public static Connection get() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASS);

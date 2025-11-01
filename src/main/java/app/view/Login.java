@@ -4,10 +4,10 @@
 
 package app.view;
 
-import java.awt.*;
-import javax.swing.*;
-import javax.swing.GroupLayout;
 import app.controller.AuthController;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author Asus
@@ -32,7 +32,7 @@ public class Login extends JFrame {
 
         try {
             if ("Admin".equalsIgnoreCase(role)) {
-                int adminId = app.controller.AuthController.loginAdmin(username, password);
+                int adminId = controller.loginAdmin(username, password);
                 JOptionPane.showMessageDialog(this, "Selamat datang Admin #" + adminId);
                 new app.view.AdminDashboard().setVisible(true);
                 dispose();
@@ -40,14 +40,14 @@ public class Login extends JFrame {
             }
 
             if ("Teacher".equalsIgnoreCase(role)) {
-                int userId = app.controller.AuthController.loginUser("TEACHER", username, password);
+                int userId = controller.loginUser("TEACHER", username, password);
                 JOptionPane.showMessageDialog(this, "Login Teacher berhasil (id=" + userId + ")");
                 new app.view.TeacherDashboard(userId).setVisible(true);
                 dispose();
                 return;
             }
             if ("Student".equalsIgnoreCase(role)) {
-                int userId = app.controller.AuthController.loginUser("STUDENT", username, password);
+                int userId = controller.loginUser("STUDENT", username, password);
                 JOptionPane.showMessageDialog(this, "Login Student berhasil (id=" + userId + ")");
                 new app.view.StudentDashboard(userId).setVisible(true);
                 dispose();
@@ -78,10 +78,10 @@ public class Login extends JFrame {
             }
 
             if ("Teacher".equalsIgnoreCase(role)) {
-                AuthController.registerTeacher(name, username, password);
+                controller.registerTeacher(name, username, password);
             } else {
                 // kalau nanti mau aktifkan student, ini sudah siap
-                AuthController.registerStudent(name, username, password);
+                controller.registerStudent(name, username, password);
             }
 
             JOptionPane.showMessageDialog(this, "Registrasi berhasil. Menunggu verifikasi admin.");
@@ -274,5 +274,6 @@ public class Login extends JFrame {
     private JButton TombLogin;
     private JButton TombRegister;
     private JComboBox<String> TombRole;
+    private AuthController controller = new AuthController();
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

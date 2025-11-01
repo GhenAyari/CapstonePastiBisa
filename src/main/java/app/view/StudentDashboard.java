@@ -8,8 +8,8 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.table.*;
-import java.sql.*; // <--- ini penting (untuk Connection, PreparedStatement, ResultSet)
-import app.util.Database; // <--- ini juga penting (untuk Database.get())
+
+import app.utilities.data.DatabaseConnection; // <--- ini juga penting (untuk Database.get())
 
 /**
  * @author Asus
@@ -35,7 +35,7 @@ public class StudentDashboard extends JFrame {
     }
 
     private void loadProfile() {
-        try (var c = Database.get();
+        try (var c = DatabaseConnection.get();
              var ps = c.prepareStatement("SELECT name, username FROM student WHERE users_id=?")) {
             ps.setInt(1, studentId);
             try (var rs = ps.executeQuery()) {
