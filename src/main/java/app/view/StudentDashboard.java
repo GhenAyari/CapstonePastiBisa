@@ -45,6 +45,12 @@ public class StudentDashboard extends JFrame {
             dispose();                     // tutup halaman student
         });
 
+        TombLihatFeedback.addActionListener(e -> {
+            new StudentFeedback(studentId).setVisible(true);
+            // kalau mau tetap di dashboard, HAPUS baris di bawah ini
+            dispose();
+        });
+
     }
 
 

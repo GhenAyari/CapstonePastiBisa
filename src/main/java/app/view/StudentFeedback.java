@@ -8,13 +8,123 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.table.*;
+import app.utilities.data.DatabaseConnection;
+import javax.swing.table.DefaultTableModel;
+import java.nio.charset.StandardCharsets;
+import java.sql.*;
+import java.util.Base64;
 
 /**
  * @author Asus
  */
 public class StudentFeedback extends JFrame {
-    public StudentFeedback() {
+    private final int studentId; // isi dari StudentDashboard
+
+    public StudentFeedback(int studentId) {
+        this.studentId = studentId;
         initComponents();
+        setLocationRelativeTo(null);
+        setTitle("Feedback untuk Student ID: " + studentId);
+
+        muatFeedbackSaya(); // isi TablePengrim
+        TablePengrim.getSelectionModel().addListSelectionListener(e -> {
+            if (!e.getValueIsAdjusting()) {
+                tampilkanPesanTerpilih();
+            }
+        });
+
+        TombolKembaliStudentFeedback.addActionListener(ev -> {
+            new StudentDashboard(studentId).setVisible(true);
+            dispose();
+        });
+    }
+
+    // ---------- HELPER PARSER ----------
+    private static String deb64(String s) {
+        return new String(Base64.getDecoder().decode(s), StandardCharsets.UTF_8);
+    }
+
+    /** return: {teacherId, studentId, messagePlain} atau null jika gagal */
+    private static String[] parsePayload(String payload) {
+        try {
+            String[] parts = payload.split("\\|");
+            int tId = -1, sId = -1;
+            String msg = "";
+            for (String p : parts) {
+                if (p.startsWith("T:")) tId = Integer.parseInt(p.substring(2).trim());
+                else if (p.startsWith("S:")) sId = Integer.parseInt(p.substring(2).trim());
+                else if (p.startsWith("B64:")) msg = deb64(p.substring(4));
+            }
+            if (tId <= 0 || sId <= 0) return null;
+            return new String[]{String.valueOf(tId), String.valueOf(sId), msg};
+        } catch (Exception ex) {
+            return null;
+        }
+    }
+
+    // ---------- LOAD & TAMPIL ----------
+    private void muatFeedbackSaya() {
+        String sql = "SELECT id_feedback, message FROM feedback ORDER BY id_feedback DESC";
+        DefaultTableModel m = new DefaultTableModel(
+                new Object[]{"Nama Teacher", "Id Feedback"}, 0
+        ) { @Override public boolean isCellEditable(int r, int c){return false;} };
+
+        try (Connection c = DatabaseConnection.get();
+             PreparedStatement ps = c.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+            while (rs.next()) {
+                int id = rs.getInt("id_feedback");
+                String msg = rs.getString("message");
+                String[] parsed = parsePayload(msg);
+                if (parsed == null) continue;
+
+                int tId = Integer.parseInt(parsed[0]);
+                int sId = Integer.parseInt(parsed[1]);
+
+                // tampilkan hanya untuk student yang login
+                if (sId != studentId) continue;
+
+                String teacherName = ambilNamaTeacher(tId);
+                m.addRow(new Object[]{teacherName, id});
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Gagal load pesan", JOptionPane.ERROR_MESSAGE);
+        }
+        TablePengrim.setModel(m);
+        TablePengrim.getColumnModel().getColumn(1).setMaxWidth(120);
+    }
+
+    private String ambilNamaTeacher(int teacherId) {
+        String sql = "SELECT name FROM teacher WHERE users_id = ?";
+        try (Connection c = DatabaseConnection.get();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, teacherId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getString("name");
+            }
+        } catch (Exception ignore) {}
+        return "Teacher #" + teacherId;
+    }
+
+    private void tampilkanPesanTerpilih() {
+        int row = TablePengrim.getSelectedRow();
+        if (row < 0) return;
+
+        int idFeedback = Integer.parseInt(TablePengrim.getValueAt(row, 1).toString());
+        String sql = "SELECT message FROM feedback WHERE id_feedback = ?";
+        try (Connection c = DatabaseConnection.get();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, idFeedback);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    String payload = rs.getString("message");
+                    String[] parsed = parsePayload(payload);
+                    IsiPesan.setText(parsed == null ? "(pesan rusak)" : parsed[2]);
+                }
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Gagal ambil pesan", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
 

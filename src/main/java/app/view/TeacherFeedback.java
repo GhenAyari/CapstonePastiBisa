@@ -13,6 +13,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
+import java.util.Base64;
 
 
 
@@ -52,25 +53,37 @@ public class TeacherFeedback extends JFrame {
                 return;
             }
 
-            int studentId = Integer.parseInt(TableSiswa.getValueAt(row, 0).toString()); // kolom 0 = users_id siswa
-            long ts = System.currentTimeMillis();
+            // kolom 0 = users_id siswa (pastikan TableSiswa kolom pertama memang users_id)
+            int studentId = Integer.parseInt(TableSiswa.getValueAt(row, 0).toString());
 
-            // >>>> SELIPKAN METADATA DI AWAL PESAN <<<<
-            String payload = String.format("[FD|t=%d|s=%d|ts=%d]\n%s", teacherId, studentId, ts, body);
+            // ====== BANGUN PAYLOAD & SIMPAN KE 1 KOLOM 'message' ======
+            String payload = buildPayload(teacherId, studentId, body);
 
             final String sql = "INSERT INTO feedback(message) VALUES (?)";
-            try (var c = app.utilities.data.DatabaseConnection.get();
+            try (var c  = app.utilities.data.DatabaseConnection.get();
                  var ps = c.prepareStatement(sql)) {
                 ps.setString(1, payload);
                 ps.executeUpdate();
+
                 JOptionPane.showMessageDialog(this, "Pesan terkirim!");
                 IsiPesan.setText("");
+                // optional: refresh daftar siswa / apapun yang kamu mau
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Gagal mengirim", JOptionPane.ERROR_MESSAGE);
             }
         });
 
         loadStudents();
+    }
+
+    // ===== helper di TeacherFeedback =====
+    private static String b64(String s) {
+        return java.util.Base64.getEncoder()
+                .encodeToString(s.getBytes(java.nio.charset.StandardCharsets.UTF_8));
+    }
+    private static String buildPayload(int teacherId, int studentId, String message) {
+        // format: T:<teacherId>|S:<studentId>|B64:<base64(message)>
+        return "T:" + teacherId + "|S:" + studentId + "|B64:" + b64(message);
     }
 
     /** Ambil daftar siswa terverifikasi dan tampilkan di tabel */
