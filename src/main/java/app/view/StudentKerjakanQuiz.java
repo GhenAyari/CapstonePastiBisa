@@ -1,167 +1,315 @@
-/*
- * Created by JFormDesigner on Wed Oct 29 14:37:01 SGT 2025
- */
-
 package app.view;
 
-import java.awt.*;
+import app.utilities.data.DatabaseConnection;
+
 import javax.swing.*;
-import javax.swing.GroupLayout;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.sql.*;
+import java.util.*;
 
 /**
- * @author Asus
+ * Kerjakan Quiz (navigasi Next/Back, submit ke rapor)
  */
 public class StudentKerjakanQuiz extends JFrame {
-    public StudentKerjakanQuiz() {
-        initComponents();
+
+    private final int studentId;
+    private final String quizTitle;
+
+    /** Struktur 1 soal pada tabel quiz */
+    private static class Q {
+        int number;           // question_number
+        String text;          // question_text
+        String a, b, c, d;    // option_a..d
+        char correct;         // 'A'..'D'
     }
 
-    private void initComponents() {
-        // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
-        // Generated using JFormDesigner Evaluation license - Ghendida
-        HalloTeacher = new JTextField();
-        panel1 = new JPanel();
-        scrollPane1 = new JScrollPane();
-        SoaKerjakanQuiz = new JTextField();
-        PilganStudentA = new JCheckBox();
-        PilganStudentB = new JCheckBox();
-        PilganStudentC = new JCheckBox();
-        PilganStudentD = new JCheckBox();
-        TombNextKerjakan = new JButton();
-        TombKumpulkan = new JButton();
-        TombKembali = new JButton();
+    private final java.util.List<Q> soal = new ArrayList<>();
+    private final Map<Integer, Character> jawaban = new HashMap<>(); // nomor -> A/B/C/D yang dipilih
+    private int idx = 0; // index soal aktif
 
-        //======== this ========
-        var contentPane = getContentPane();
-
-        //---- HalloTeacher ----
-        HalloTeacher.setText("Hallo, Student");
-        HalloTeacher.setBackground(new Color(0x0099cc));
-        HalloTeacher.setCursor(Cursor.getPredefinedCursor(Cursor.TEXT_CURSOR));
-        HalloTeacher.setFont(new Font("Gill Sans MT", Font.PLAIN, 16));
-        HalloTeacher.setForeground(new Color(0x333333));
-
-        //======== panel1 ========
-        {
-            panel1.setBackground(new Color(0x009999));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing
-            . border. EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDes\u0069gner \u0045valua\u0074ion", javax. swing. border. TitledBorder
-            . CENTER, javax. swing. border. TitledBorder. BOTTOM, new java .awt .Font ("D\u0069alog" ,java .
-            awt .Font .BOLD ,12 ), java. awt. Color. red) ,panel1. getBorder( )) )
-            ; panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-            ) {if ("\u0062order" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} )
-            ;
-
-            //======== scrollPane1 ========
-            {
-                scrollPane1.setViewportView(SoaKerjakanQuiz);
-            }
-
-            //---- PilganStudentA ----
-            PilganStudentA.setText("A");
-
-            //---- PilganStudentB ----
-            PilganStudentB.setText("B");
-
-            //---- PilganStudentC ----
-            PilganStudentC.setText("C");
-
-            //---- PilganStudentD ----
-            PilganStudentD.setText("D");
-
-            //---- TombNextKerjakan ----
-            TombNextKerjakan.setText("Next");
-
-            //---- TombKumpulkan ----
-            TombKumpulkan.setText("Kumpulkan");
-
-            //---- TombKembali ----
-            TombKembali.setText("Kembali");
-
-            GroupLayout panel1Layout = new GroupLayout(panel1);
-            panel1.setLayout(panel1Layout);
-            panel1Layout.setHorizontalGroup(
-                panel1Layout.createParallelGroup()
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGroup(panel1Layout.createParallelGroup()
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(16, 16, 16)
-                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 499, GroupLayout.PREFERRED_SIZE))
-                            .addGroup(panel1Layout.createSequentialGroup()
-                                .addGap(24, 24, 24)
-                                .addComponent(PilganStudentA)
-                                .addGap(29, 29, 29)
-                                .addComponent(PilganStudentB)
-                                .addGap(39, 39, 39)
-                                .addComponent(PilganStudentC)
-                                .addGap(45, 45, 45)
-                                .addComponent(PilganStudentD)
-                                .addGap(42, 42, 42)
-                                .addComponent(TombNextKerjakan)
-                                .addGap(28, 28, 28)
-                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(TombKembali, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(TombKumpulkan, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                        .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            );
-            panel1Layout.setVerticalGroup(
-                panel1Layout.createParallelGroup()
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(58, 58, 58)
-                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 121, GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
-                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                            .addComponent(PilganStudentA)
-                            .addComponent(PilganStudentB)
-                            .addComponent(PilganStudentC)
-                            .addComponent(PilganStudentD)
-                            .addComponent(TombNextKerjakan)
-                            .addComponent(TombKumpulkan))
-                        .addGap(33, 33, 33)
-                        .addComponent(TombKembali)
-                        .addContainerGap(190, Short.MAX_VALUE))
-            );
-        }
-
-        GroupLayout contentPaneLayout = new GroupLayout(contentPane);
-        contentPane.setLayout(contentPaneLayout);
-        contentPaneLayout.setHorizontalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(contentPaneLayout.createParallelGroup()
-                        .addGroup(GroupLayout.Alignment.TRAILING, contentPaneLayout.createSequentialGroup()
-                            .addGap(0, 0, Short.MAX_VALUE)
-                            .addComponent(HalloTeacher, GroupLayout.PREFERRED_SIZE, 597, GroupLayout.PREFERRED_SIZE))
-                        .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addContainerGap())
-        );
-        contentPaneLayout.setVerticalGroup(
-            contentPaneLayout.createParallelGroup()
-                .addGroup(contentPaneLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(HalloTeacher, GroupLayout.PREFERRED_SIZE, 24, GroupLayout.PREFERRED_SIZE)
-                    .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                    .addComponent(panel1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addContainerGap())
-        );
-        pack();
-        setLocationRelativeTo(getOwner());
-        // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
-    }
-
-    // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
-    // Generated using JFormDesigner Evaluation license - Ghendida
+    // ===== Komponen UI =====
     private JTextField HalloTeacher;
     private JPanel panel1;
     private JScrollPane scrollPane1;
-    private JTextField SoaKerjakanQuiz;
-    private JCheckBox PilganStudentA;
-    private JCheckBox PilganStudentB;
-    private JCheckBox PilganStudentC;
-    private JCheckBox PilganStudentD;
-    private JButton TombNextKerjakan;
-    private JButton TombKumpulkan;
-    private JButton TombKembali;
-    // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
+
+    private JTextArea SoaKerjakanQuiz;
+    private JRadioButton PilganStudentA, PilganStudentB, PilganStudentC, PilganStudentD;
+    private JButton TombNextKerjakan, TombKembali, TombKumpulkan;
+    private ButtonGroup group;
+
+    public StudentKerjakanQuiz(int studentId, String quizTitle) {
+        this.studentId = studentId;
+        this.quizTitle = quizTitle;
+
+        initComponents();
+        setTitle("Kerjakan: " + quizTitle);
+        setLocationRelativeTo(null);
+
+        // group radio
+        group = new ButtonGroup();
+        group.add(PilganStudentA);
+        group.add(PilganStudentB);
+        group.add(PilganStudentC);
+        group.add(PilganStudentD);
+
+        // events
+        TombNextKerjakan.addActionListener(this::onNext);
+        TombKembali.addActionListener(this::onBack);
+        TombKumpulkan.addActionListener(this::onSubmit);
+
+        // load semua soal
+        loadQuestions();
+
+        // tampilkan soal pertama / disable jika kosong
+        if (!soal.isEmpty()) {
+            idx = 0;
+            render();
+        } else {
+            JOptionPane.showMessageDialog(this, "Belum ada soal untuk quiz ini.");
+            TombNextKerjakan.setEnabled(false);
+            TombKembali.setEnabled(false);
+            TombKumpulkan.setEnabled(false);
+        }
+    }
+
+    /** Ambil daftar soal untuk quizTitle ini */
+    private void loadQuestions() {
+        final String sql =
+                "SELECT question_number, " +
+                        "       COALESCE(question_text, soal) AS qtext, " +  // <-- fallback ke kolom 'soal' jika question_text null
+                        "       option_a, option_b, option_c, option_d, correct_answer " +
+                        "FROM quiz WHERE quiz_title = ? ORDER BY question_number";
+
+        try (Connection c = DatabaseConnection.get();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, quizTitle);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    Q q = new Q();
+                    q.number  = rs.getInt("question_number");
+                    q.text    = rs.getString("qtext");       // <-- pakai alias qtext
+                    q.a       = rs.getString("option_a");
+                    q.b       = rs.getString("option_b");
+                    q.c       = rs.getString("option_c");
+                    q.d       = rs.getString("option_d");
+                    String corr = rs.getString("correct_answer");
+                    q.correct = (corr != null && !corr.isEmpty())
+                            ? Character.toUpperCase(corr.charAt(0))
+                            : 'A';
+                    soal.add(q);
+                }
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Gagal load soal", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+
+    /** Render 1 soal ke UI berdasarkan index aktif */
+    private void render() {
+        Q q = soal.get(idx);
+
+        // header
+        HalloTeacher.setText("Hallo, Student — Quiz: " + quizTitle);
+
+        // isi area soal
+        SoaKerjakanQuiz.setText("Soal #" + q.number + "\n\n" + (q.text == null ? "" : q.text));
+
+        // set text radio
+        PilganStudentA.setText("A  " + (q.a == null ? "" : q.a));
+        PilganStudentB.setText("B  " + (q.b == null ? "" : q.b));
+        PilganStudentC.setText("C  " + (q.c == null ? "" : q.c));
+        PilganStudentD.setText("D  " + (q.d == null ? "" : q.d));
+
+        // restore jawaban jika sudah ada
+        group.clearSelection();
+        Character chosen = jawaban.get(q.number);
+        if (chosen != null) {
+            switch (Character.toUpperCase(chosen)) {
+                case 'A' -> PilganStudentA.setSelected(true);
+                case 'B' -> PilganStudentB.setSelected(true);
+                case 'C' -> PilganStudentC.setSelected(true);
+                case 'D' -> PilganStudentD.setSelected(true);
+            }
+        }
+
+        // tombol navigasi
+        TombKembali.setEnabled(idx > 0);
+        boolean last = (idx == soal.size() - 1);
+        TombNextKerjakan.setVisible(!last);
+        TombKumpulkan.setVisible(last);
+    }
+
+    private void captureCurrentChoice() {
+        Q q = soal.get(idx);
+        if (PilganStudentA.isSelected())      jawaban.put(q.number, 'A');
+        else if (PilganStudentB.isSelected()) jawaban.put(q.number, 'B');
+        else if (PilganStudentC.isSelected()) jawaban.put(q.number, 'C');
+        else if (PilganStudentD.isSelected()) jawaban.put(q.number, 'D');
+        // jika tidak memilih, dianggap salah saat submit (tidak disimpan)
+    }
+
+    private void onNext(ActionEvent e) {
+        captureCurrentChoice();
+        if (idx < soal.size() - 1) {
+            idx++;
+            render();
+        }
+    }
+
+    private void onBack(ActionEvent e) {
+        captureCurrentChoice();
+        if (idx > 0) {
+            idx--;
+            render();
+        }
+    }
+
+    private void onSubmit(ActionEvent e) {
+        captureCurrentChoice();
+
+        int benar = 0;
+        for (Q q : soal) {
+            char my = Character.toUpperCase(jawaban.getOrDefault(q.number, ' '));
+            if (my == q.correct) benar++;
+        }
+        int salah = soal.size() - benar;
+
+        // quiz_id representatif = MIN(question_id) untuk quiz_title ini
+        int quizId = fetchRepresentativeQuizId();
+
+        // simpan ke rapor
+        try (Connection c = DatabaseConnection.get();
+             PreparedStatement ps = c.prepareStatement(
+                     "INSERT INTO rapor (student_id, quiz_id, is_incorrect, is_correct, total_scores) " +
+                             "VALUES (?,?,?,?,?)")) {
+            ps.setInt(1, studentId);
+            ps.setInt(2, quizId);
+            ps.setInt(3, salah);
+            ps.setInt(4, benar);
+            ps.setInt(5, benar); // total_scores = jumlah benar
+            ps.executeUpdate();
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Gagal simpan nilai", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        JOptionPane.showMessageDialog(this,
+                "Terkumpul!\nBenar: " + benar + "\nSalah: " + salah + "\nSkor: " + benar);
+
+        new StudentDashboard(studentId).setVisible(true);
+        dispose();
+    }
+
+    private int fetchRepresentativeQuizId() {
+        final String sql = "SELECT MIN(question_id) AS quiz_id FROM quiz WHERE quiz_title = ?";
+        try (Connection c = DatabaseConnection.get();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setString(1, quizTitle);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getInt("quiz_id");
+            }
+        } catch (Exception ignore) {}
+        return 0; // fallback
+    }
+
+    // ===== UI builder (tanpa artefak JFormDesigner yang bikin error) =====
+    private void initComponents() {
+        var contentPane = getContentPane();
+
+        HalloTeacher = new JTextField();
+        panel1 = new JPanel();
+        scrollPane1 = new JScrollPane();
+
+        SoaKerjakanQuiz = new JTextArea();
+        PilganStudentA = new JRadioButton("A");
+        PilganStudentB = new JRadioButton("B");
+        PilganStudentC = new JRadioButton("C");
+        PilganStudentD = new JRadioButton("D");
+
+        TombNextKerjakan = new JButton("Next");
+        TombKumpulkan   = new JButton("Kumpulkan");
+        TombKembali     = new JButton("Kembali");
+
+        // header
+        HalloTeacher.setText("Hallo, Student");
+        HalloTeacher.setBackground(new Color(0x0099cc));
+        HalloTeacher.setFont(new Font("Gill Sans MT", Font.PLAIN, 16));
+        HalloTeacher.setForeground(new Color(0x333333));
+
+        // panel
+        panel1.setBackground(new Color(0x009999));
+
+        // area soal
+        SoaKerjakanQuiz.setLineWrap(true);
+        SoaKerjakanQuiz.setWrapStyleWord(true);
+        SoaKerjakanQuiz.setEditable(false);
+        scrollPane1.setViewportView(SoaKerjakanQuiz);
+
+        // layout panel1
+        GroupLayout panel1Layout = new GroupLayout(panel1);
+        panel1.setLayout(panel1Layout);
+        panel1Layout.setHorizontalGroup(
+                panel1Layout.createParallelGroup()
+                        .addGroup(panel1Layout.createSequentialGroup()
+                                .addGroup(panel1Layout.createParallelGroup()
+                                        .addGroup(panel1Layout.createSequentialGroup()
+                                                .addGap(16)
+                                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 520, GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(panel1Layout.createSequentialGroup()
+                                                .addGap(24)
+                                                .addComponent(PilganStudentA)
+                                                .addGap(24)
+                                                .addComponent(PilganStudentB)
+                                                .addGap(24)
+                                                .addComponent(PilganStudentC)
+                                                .addGap(24)
+                                                .addComponent(PilganStudentD)
+                                                .addGap(30)
+                                                .addComponent(TombNextKerjakan)
+                                                .addGap(12)
+                                                .addGroup(panel1Layout.createParallelGroup()
+                                                        .addComponent(TombKumpulkan, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(TombKembali, GroupLayout.PREFERRED_SIZE, 110, GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap(20, Short.MAX_VALUE))
+        );
+        panel1Layout.setVerticalGroup(
+                panel1Layout.createParallelGroup()
+                        .addGroup(panel1Layout.createSequentialGroup()
+                                .addGap(20)
+                                .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE)
+                                .addGap(24)
+                                .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                                        .addComponent(PilganStudentA)
+                                        .addComponent(PilganStudentB)
+                                        .addComponent(PilganStudentC)
+                                        .addComponent(PilganStudentD)
+                                        .addComponent(TombNextKerjakan)
+                                        .addComponent(TombKumpulkan))
+                                .addGap(18)
+                                .addComponent(TombKembali)
+                                .addContainerGap(20, Short.MAX_VALUE))
+        );
+
+        // layout root
+        GroupLayout contentPaneLayout = new GroupLayout(contentPane);
+        contentPane.setLayout(contentPaneLayout);
+        contentPaneLayout.setHorizontalGroup(
+                contentPaneLayout.createParallelGroup()
+                        .addComponent(HalloTeacher)
+                        .addComponent(panel1)
+        );
+        contentPaneLayout.setVerticalGroup(
+                contentPaneLayout.createParallelGroup()
+                        .addGroup(contentPaneLayout.createSequentialGroup()
+                                .addComponent(HalloTeacher, GroupLayout.PREFERRED_SIZE, 28, GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(panel1)
+                                .addContainerGap())
+        );
+
+        pack();
+        setLocationRelativeTo(getOwner());
+    }
 }

@@ -31,6 +31,9 @@ public class StudentDashboard extends JFrame {
         loadProfile();
         loadAllQuizForStudent();
 
+        TombKerjakanQuiz.addActionListener(e -> onKerjakanQuiz());
+
+
         // === Tambahkan ini ===
         TombKembaliDashStudent.addActionListener(e -> {
             new Login().setVisible(true);  // buka halaman login lagi
@@ -83,6 +86,18 @@ public class StudentDashboard extends JFrame {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    private void onKerjakanQuiz() {
+        int row = TableDashStudent.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Pilih salah satu quiz dulu di tabel.");
+            return;
+        }
+
+        String quizTitle = TableDashStudent.getValueAt(row, 0).toString(); // kolom 0 = Nama Quiz
+        new app.view.StudentKerjakanQuiz(studentId, quizTitle).setVisible(true);
+        dispose();
     }
 
 

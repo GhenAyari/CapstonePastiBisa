@@ -4,7 +4,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {space :::p, par l {seq t {space :0:0:x, comp HalloTeacher:::p:597:p}, comp panel1::l:::x}, space :::p}}"
+			"$horizontalGroup": "par l {seq l {space :p:6:p, par l {comp panel1:::p::p, comp HalloTeacher:::p:703:p}}}"
 			"$verticalGroup": "par l {seq l {space :::p, comp HalloTeacher:::p:24:p, space :::p, comp panel1:::::x, space :::p}}"
 		} ) {
 			name: "this"
@@ -17,8 +17,8 @@ new FormModel {
 				"foreground": new java.awt.Color( 51, 51, 51, 255 )
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {par l {seq l {space :p:16:p, comp scrollPane1:::p:499:p}, seq l {space :p:24:p, comp PilganStudentA:::p::p, space :p:29:p, comp PilganStudentB:::p::p, space :p:39:p, comp PilganStudentC:::p::p, space :p:45:p, comp PilganStudentD:::p::p, space :p:42:p, comp TombNextKerjakan:::p::p, space :p:28:p, par l:::p {comp TombKembali:::::x, comp TombKumpulkan:::::x}}}, space :::x}}"
-				"$verticalGroup": "par l {seq l {space :p:58:p, comp scrollPane1:::p:121:p, space :p:33:p, par b {comp PilganStudentA::b:p::p, comp PilganStudentB::b:p::p, comp PilganStudentC::b:p::p, comp PilganStudentD::b:p::p, comp TombNextKerjakan::b:p::p, comp TombKumpulkan::b:p::p}, space :p:33:p, comp TombKembali:::p::p, space ::190:x}}"
+				"$horizontalGroup": "par l {seq {par l {seq l {space :p:16:p, comp scrollPane1:::p:499:p}, seq l {space :p:24:p, comp PilganStudentA:::p::p, space :p:29:p, comp PilganStudentB:::p::p, space :p:39:p, comp PilganStudentC:::p::p, space :p:45:p, comp PilganStudentD:::p::p, space :p:42:p, comp TombNextKerjakan:::p::p, space :p:28:p, par l:::p {comp TombKembali:::::x, comp TombKumpulkan:::::x}}}, space ::200:x}}"
+				"$verticalGroup": "par l {seq l {space :p:58:p, comp scrollPane1:::p:121:p, space :p:33:p, par b {comp PilganStudentA::b:p::p, comp PilganStudentB::b:p::p, comp PilganStudentC::b:p::p, comp PilganStudentD::b:p::p, comp TombNextKerjakan::b:p::p, comp TombKumpulkan::b:p::p}, space :p:33:p, comp TombKembali:::p::p, space ::247:x}}"
 			} ) {
 				name: "panel1"
 				"background": new java.awt.Color( 0, 153, 153, 255 )
@@ -59,7 +59,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 480, 460 )
+			"size": new java.awt.Dimension( 570, 506 )
 		} )
 	}
 }
