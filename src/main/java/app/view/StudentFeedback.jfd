@@ -4,28 +4,30 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq t {space :::x, comp HalloStudentFeedback:::p:854:p, space :::p}, seq l {space :::p, comp panel1:::p::p, space :::x}}"
-			"$verticalGroup": "par l {seq l {comp HalloStudentFeedback:::p::p, space :::p, comp panel1:::::x, space :::p}}"
+			"$horizontalGroup": "par l {comp NamaGuruPengirim::l::798:x, comp panel1::l:::x}"
+			"$verticalGroup": "par l {seq l {space :::p, comp NamaGuruPengirim:::p::p, space :::p, comp panel1:::::x}}"
 		} ) {
 			name: "this"
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "HalloStudentFeedback"
-				"text": "Hallo Student"
-				"background": new java.awt.Color( 0, 153, 204, 255 )
-				"cursor": new java.awt.Cursor( 2 )
-				"font": new java.awt.Font( "Gill Sans MT", 0, 16 )
-				"foreground": new java.awt.Color( 51, 51, 51, 255 )
-			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :p:36:p, comp scrollPane1:::p:470:p, space :p:64:p, comp TombolKembaliFeedback:::p::p, space ::137:x}}"
-				"$verticalGroup": "par l {seq l {space :p:89:p, par l {comp TombolKembaliFeedback:::p::p, comp scrollPane1:::p:384:p}, space ::66:x}}"
+				"$horizontalGroup": "par l {seq l {space :p:43:p, par l {seq {comp scrollPane2:::p:440:p, space ::66:x, comp TombolKembaliStudentFeedback:::p:95:p, space :p:154:p}, seq {par l {comp scrollPane1:::p:460:p, comp label1::l:p:199:p}, space ::295:x}}}}"
+				"$verticalGroup": "par l {seq l {par l {seq {space :p:69:p, comp TombolKembaliStudentFeedback:::p::p}, seq l {space :p:34:p, comp scrollPane2:::p:192:p}}, space ::43:x, comp label1:::p::p, space :::p, comp scrollPane1:::p:212:p, space :p:34:p}}"
 			} ) {
 				name: "panel1"
 				"background": new java.awt.Color( 0, 102, 102, 255 )
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "IsiPesan"
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombolKembaliStudentFeedback"
+					"text": "Kembali"
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane2"
 					add( new FormComponent( "javax.swing.JTable" ) {
-						name: "table1"
+						name: "TablePengrim"
 						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
 							add( new java.util.Vector {
 								add( null )
@@ -36,8 +38,8 @@ new FormModel {
 								add( null )
 							} )
 						}, new java.util.Vector {
+							add( "Nama Teacher" )
 							add( "Id Feedback" )
-							add( "Pesan" )
 						}, new java.util.Vector {
 							add( null )
 							add( null )
@@ -50,14 +52,22 @@ new FormModel {
 						} )
 					} )
 				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "TombolKembaliFeedback"
-					"text": "Kembali"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "Isi pesan:"
 				} )
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "NamaGuruPengirim"
+				"text": "Hallo, Teacher"
+				"background": new java.awt.Color( 0, 153, 204, 255 )
+				"cursor": new java.awt.Cursor( 2 )
+				"font": new java.awt.Font( "Gill Sans MT", 0, 16 )
+				"foreground": new java.awt.Color( 51, 51, 51, 255 )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 6, 0 )
-			"size": new java.awt.Dimension( 634, 495 )
+			"size": new java.awt.Dimension( 640, 495 )
 		} )
 	}
 }

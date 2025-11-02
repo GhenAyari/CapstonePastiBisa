@@ -179,6 +179,7 @@ public class TeacherDashboard extends JFrame {
         TombHapusQuiz = new JButton();
         TombolKembaliDashboard = new JButton();
         TombLihatSkor = new JButton();
+        TombKirimPesan = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -193,13 +194,12 @@ public class TeacherDashboard extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x009999));
-            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new
-            javax . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax
-            . swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java
-            . awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt
-            . Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .
-            PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .
-            equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder
+            ( 0, 0, 0, 0) , "JFor\u006dDesi\u0067ner \u0045valu\u0061tion", javax. swing. border. TitledBorder. CENTER, javax. swing. border
+            . TitledBorder. BOTTOM, new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt
+            . Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void
+            propertyChange (java .beans .PropertyChangeEvent e) {if ("bord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( )
+            ; }} );
 
             //---- DaftarQuizTeacher ----
             DaftarQuizTeacher.setText("Daftar Quiz");
@@ -237,6 +237,9 @@ public class TeacherDashboard extends JFrame {
             //---- TombLihatSkor ----
             TombLihatSkor.setText("Lihat Skor");
 
+            //---- TombKirimPesan ----
+            TombKirimPesan.setText("Kirim Pesan");
+
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
@@ -252,7 +255,8 @@ public class TeacherDashboard extends JFrame {
                             .addComponent(TombUpdateQuiz, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(TombHapusQuiz, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(TombolKembaliDashboard, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TombLihatSkor, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(TombLihatSkor, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TombKirimPesan, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(26, Short.MAX_VALUE))
             );
             panel1Layout.setVerticalGroup(
@@ -275,7 +279,9 @@ public class TeacherDashboard extends JFrame {
                                 .addGap(32, 32, 32)
                                 .addComponent(TombHapusQuiz)
                                 .addGap(38, 38, 38)
-                                .addComponent(TombLihatSkor)))
+                                .addComponent(TombLihatSkor)
+                                .addGap(37, 37, 37)
+                                .addComponent(TombKirimPesan)))
                         .addContainerGap(21, Short.MAX_VALUE))
             );
         }
@@ -318,5 +324,6 @@ public class TeacherDashboard extends JFrame {
     private JButton TombHapusQuiz;
     private JButton TombolKembaliDashboard;
     private JButton TombLihatSkor;
+    private JButton TombKirimPesan;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

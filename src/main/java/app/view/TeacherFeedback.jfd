@@ -1,0 +1,77 @@
+JFDML JFormDesigner: "8.2.4.0.393" Java: "21.0.8" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+			"$horizontalGroup": "par l {seq t {space :0:0:x, par l {comp panel1:::p::p, comp HalloAdmin:::p:869:p}}}"
+			"$verticalGroup": "par l {seq l {comp HalloAdmin:::p::p, space :::x, comp panel1:::p::p}}"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "HalloAdmin"
+				"text": "Hallo Teacher"
+				"background": new java.awt.Color( 0, 153, 204, 255 )
+				"cursor": new java.awt.Cursor( 2 )
+				"font": new java.awt.Font( "Gill Sans MT", 0, 16 )
+				"foreground": new java.awt.Color( 51, 51, 51, 255 )
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
+				"$horizontalGroup": "par l {seq l {space :p:31:p, par l {seq {comp scrollPane1:::p:400:p, space :p:111:p, par l:::p {comp TombolKirimTeacher::::116:x, comp TombolKembaliTeacherFeedback::::116:x}}, comp scrollPane2:::p:535:p, comp label1::l:p:127:p}, space ::217:x}}"
+				"$verticalGroup": "par l {seq l {par l {seq {space :p:53:p, comp TombolKembaliTeacherFeedback:::p::p, space :p:40:p, comp TombolKirimTeacher:::p::p}, seq l {space :p:25:p, comp scrollPane1:::p:180:p}}, space ::53:x, comp label1:::p::p, space u:::p, comp scrollPane2:::p:145:p, space :p:44:p}}"
+			} ) {
+				name: "panel1"
+				"background": new java.awt.Color( 0, 102, 102, 255 )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JTable" ) {
+						name: "TableSiswa"
+						"model": new com.jformdesigner.model.SwingTableModel( new java.util.Vector {
+							add( new java.util.Vector {
+								add( null )
+								add( null )
+							} )
+							add( new java.util.Vector {
+								add( null )
+								add( null )
+							} )
+						}, new java.util.Vector {
+							add( "Username Siswa" )
+							add( "Nama Siswa" )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+						}, new java.util.Vector {
+							add( null )
+							add( null )
+						} )
+					} )
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane2"
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "IsiPesan"
+					} )
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "Isi pesan dibawah:"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombolKembaliTeacherFeedback"
+					"text": "Kembali"
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "TombolKirimTeacher"
+					"text": "Kirim"
+				} )
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 606, 446 )
+		} )
+	}
+}
