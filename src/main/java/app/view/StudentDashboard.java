@@ -44,7 +44,9 @@ public class StudentDashboard extends JFrame {
             new Login().setVisible(true);  // buka halaman login lagi
             dispose();                     // tutup halaman student
         });
+
     }
+
 
     private void loadProfile() {
         try (var c = DatabaseConnection.get();

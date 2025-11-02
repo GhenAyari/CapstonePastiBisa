@@ -17,6 +17,8 @@ public class StudentFeedback extends JFrame {
         initComponents();
     }
 
+
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents  @formatter:off
         // Generated using JFormDesigner Evaluation license - Ghendida

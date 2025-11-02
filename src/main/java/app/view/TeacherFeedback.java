@@ -4,17 +4,152 @@
 
 package app.view;
 
-import java.awt.*;
+import app.utilities.data.DatabaseConnection;
+
 import javax.swing.*;
-import javax.swing.GroupLayout;
-import javax.swing.table.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Date;
+
+
 
 /**
  * @author Asus
  */
 public class TeacherFeedback extends JFrame {
-    public TeacherFeedback() {
-        initComponents();
+
+    private final int teacherId;
+
+    // komponen dari form (pastikan namanya sama dengan di JFormDesigner)
+//    private JTable TableSiswa;
+//    private JTextArea IsiPesan;
+//    private JButton TombolKembaliTeacherFeedback, TombolKirimTeacher;
+
+    public TeacherFeedback(int teacherId) {
+        this.teacherId = teacherId;
+        initComponents();                 // <-- panggil form JFD-mu
+        setTitle("Kirim Pesan / Feedback");
+        setLocationRelativeTo(null);
+
+        // wire events
+        TombolKembaliTeacherFeedback.addActionListener(e -> {
+            new TeacherDashboard(teacherId).setVisible(true);
+            dispose();
+        });
+
+        TombolKirimTeacher.addActionListener(e -> {
+            int row = TableSiswa.getSelectedRow();
+            if (row < 0) {
+                JOptionPane.showMessageDialog(this, "Pilih siswa di tabel dulu.");
+                return;
+            }
+            String body = IsiPesan.getText().trim();
+            if (body.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Isi pesan tidak boleh kosong.");
+                return;
+            }
+
+            int studentId = Integer.parseInt(TableSiswa.getValueAt(row, 0).toString()); // kolom 0 = users_id siswa
+            long ts = System.currentTimeMillis();
+
+            // >>>> SELIPKAN METADATA DI AWAL PESAN <<<<
+            String payload = String.format("[FD|t=%d|s=%d|ts=%d]\n%s", teacherId, studentId, ts, body);
+
+            final String sql = "INSERT INTO feedback(message) VALUES (?)";
+            try (var c = app.utilities.data.DatabaseConnection.get();
+                 var ps = c.prepareStatement(sql)) {
+                ps.setString(1, payload);
+                ps.executeUpdate();
+                JOptionPane.showMessageDialog(this, "Pesan terkirim!");
+                IsiPesan.setText("");
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Gagal mengirim", JOptionPane.ERROR_MESSAGE);
+            }
+        });
+
+        loadStudents();
+    }
+
+    /** Ambil daftar siswa terverifikasi dan tampilkan di tabel */
+    private void loadStudents() {
+        final String sql =
+                "SELECT users_id, username, name FROM student " +
+                        "WHERE is_verified = TRUE ORDER BY username";
+
+        DefaultTableModel m = new DefaultTableModel(
+                new Object[]{"ID", "Username Siswa", "Nama Siswa"}, 0
+        ) {
+            @Override public boolean isCellEditable(int r, int c) { return false; }
+        };
+
+        try (Connection c = DatabaseConnection.get();
+             PreparedStatement ps = c.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                m.addRow(new Object[]{
+                        rs.getInt("users_id"),
+                        rs.getString("username"),
+                        rs.getString("name")
+                });
+            }
+            TableSiswa.setModel(m);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Gagal load siswa",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /** Ambil username guru (untuk metadata pesan) */
+    private String fetchTeacherUsername() {
+        final String sql = "SELECT username FROM teacher WHERE users_id = ?";
+        try (Connection c = DatabaseConnection.get();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, teacherId);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) return rs.getString(1);
+            }
+        } catch (Exception ignore) {}
+        return "unknown";
+    }
+
+    /** Kirim pesan -> INSERT ke feedback(message) saja */
+    private void onSend() {
+        int row = TableSiswa.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Pilih siswa dulu dari tabel.");
+            return;
+        }
+        String studentUsername = String.valueOf(TableSiswa.getValueAt(row, 1));
+        String studentName     = String.valueOf(TableSiswa.getValueAt(row, 2));
+
+        String body = IsiPesan.getText().trim();
+        if (body.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Isi pesan tidak boleh kosong.");
+            IsiPesan.requestFocus();
+            return;
+        }
+
+        // bentuk payload + metadata (tanpa ubah tabel)
+        String teacherUsername = fetchTeacherUsername();
+        String header = String.format("[From: %s → To: %s (%s) @%tF %<tT]",
+                teacherUsername, studentUsername, studentName, new Date());
+        String payload = header + System.lineSeparator() + body;
+
+        final String insert = "INSERT INTO feedback (message) VALUES (?)";
+        try (Connection c = DatabaseConnection.get();
+             PreparedStatement ps = c.prepareStatement(insert)) {
+            ps.setString(1, payload);
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Pesan terkirim.");
+            IsiPesan.setText("");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Gagal mengirim",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void initComponents() {

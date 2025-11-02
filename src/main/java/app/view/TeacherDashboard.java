@@ -47,6 +47,12 @@ public class TeacherDashboard extends JFrame {
 
         TombLihatSkor.addActionListener(e -> onSeeScores());
 
+        TombKirimPesan.addActionListener(e -> {
+            new app.view.TeacherFeedback(teacherId).setVisible(true);
+            dispose();
+        });
+
+
     }
 
 
