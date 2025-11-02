@@ -37,33 +37,46 @@ public class AuthController extends BaseController {
         } catch (SQLException e) {
             if (e.getMessage().toLowerCase().contains("duplicate")) {
                 throw new Exception("Username sudah dipakai");
-            }else throw e;
+            } else throw e;
         }
     }
 
     public int loginAdmin(String username, String password) throws Exception {
-        String sql = "SELECT id_admin FROM admin WHERE username=? AND password=?";
-        try  {
-            ResultSet rs = execQuery(sql, username, password);
-            if (rs.next()) return rs.getInt(1);
+        final String sql =
+                "SELECT id_admin FROM admin WHERE username=? AND password=? LIMIT 1";
+
+        try (var rs = execQuery(sql, username, password)) {
+            if (rs.next()) {
+                return rs.getInt("id_admin");
+            }
+            throw new Exception("Username / password admin salah.");
         } catch (SQLException e) {
-            throw new Exception("Admin tidak ditemukan / password salah");
+            // biar pesan user-friendly, tapi akar error tetap kelihatan di log
+            throw new Exception("Gagal login admin: " + e.getMessage());
         }
-        return -1;
     }
 
     public int loginUser(String role, String username, String password) throws Exception {
-        String table = role.equalsIgnoreCase("TEACHER") ? "teacher" : "student";
-        String sql = "SELECT users_id, is_verified FROM " + table + " WHERE username=? AND password=?";
-        try {
-            ResultSet rs = execQuery(sql, username, password);
+        // Normalisasi & validasi role
+        final String r = role == null ? "" : role.trim().toUpperCase();
+        if (!r.equals("TEACHER") && !r.equals("STUDENT")) {
+            throw new Exception("Role tidak valid.");
+        }
+
+        final String table = r.equals("TEACHER") ? "teacher" : "student";
+        // is_verified=1 supaya yang pending tidak bisa login
+        final String sql =
+                "SELECT users_id FROM " + table + " " +
+                        "WHERE username=? AND password=? AND is_verified=1 " +
+                        "LIMIT 1";
+
+        try (var rs = execQuery(sql, username, password)) {
             if (rs.next()) {
-                if (!rs.getBoolean("is_verified")) throw new Exception("Akun belum diverifikasi admin");
                 return rs.getInt("users_id");
             }
-        } catch (Exception e) {
-            throw new Exception(role + " tidak ditemukan / password salah");
+            throw new Exception("Username / password salah atau akun belum diverifikasi.");
+        } catch (SQLException e) {
+            throw new Exception("Gagal login " + r.toLowerCase() + ": " + e.getMessage());
         }
-        return -1;
     }
 }

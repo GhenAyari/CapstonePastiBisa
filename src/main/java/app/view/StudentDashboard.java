@@ -8,6 +8,8 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
 import javax.swing.table.*;
+import java.sql.*;
+import javax.swing.table.DefaultTableModel;
 
 import app.utilities.data.DatabaseConnection; // <--- ini juga penting (untuk Database.get())
 
@@ -27,6 +29,8 @@ public class StudentDashboard extends JFrame {
         setTitle("Student Dashboard - ID: " + studentId);
         setLocationRelativeTo(null);
         loadProfile();
+        loadAllQuizForStudent();
+
         // === Tambahkan ini ===
         TombKembaliDashStudent.addActionListener(e -> {
             new Login().setVisible(true);  // buka halaman login lagi
@@ -49,6 +53,35 @@ public class StudentDashboard extends JFrame {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    private void loadAllQuizForStudent() {
+        final String sql =
+                "SELECT quiz_title, COUNT(*) AS jumlah_soal " +
+                        "FROM quiz " +
+                        "GROUP BY quiz_title " +
+                        "ORDER BY quiz_title";
+
+        try (var conn = app.utilities.data.DatabaseConnection.get();
+             var ps   = conn.prepareStatement(sql);
+             var rs   = ps.executeQuery()) {
+
+            var model = new javax.swing.table.DefaultTableModel(
+                    new Object[]{"Nama Quiz", "Jumlah Soal"}, 0
+            ) {
+                @Override public boolean isCellEditable(int r, int c) { return false; }
+            };
+
+            while (rs.next()) {
+                String title = rs.getString("quiz_title");
+                int count    = rs.getInt("jumlah_soal");
+                model.addRow(new Object[]{title, count});
+            }
+
+            TableDashStudent.setModel(model); // pastikan nama JTable sesuai punyamu
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
 
