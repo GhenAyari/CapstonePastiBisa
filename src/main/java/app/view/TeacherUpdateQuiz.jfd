@@ -17,8 +17,8 @@ new FormModel {
 				"foreground": new java.awt.Color( 51, 51, 51, 255 )
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {comp label2:::p:163:p, space :::x}, seq t {par l {seq {comp label1:::p:163:p, space :::p, comp beradaDiSoal:::p:70:p}, comp TextSoal:::p:491:p}, space ::154:x, par l {comp label3:::p:93:p, par t:l::p {comp button1::l:::x, comp spinner1::l:::x}, comp TombKembaliUpdateQuiz:::p::p}, space :p:30:p}}}}"
-				"$verticalGroup": "par l {seq l {space :p:14:p, par b {comp label1::b:p::p, comp beradaDiSoal::b:p::p, comp TombKembaliUpdateQuiz::b:p::p}, space s:::p, comp label2:::p::p, space u:::p, par l {seq {comp label3:::p:32:p, space :::p, comp spinner1:::p::p, space :p:23:p, comp button1:::p::p}, comp TextSoal:::p:305:p}, space ::130:x}}"
+				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {comp label2:::p:163:p, space :::x}, seq t {par l {seq {comp label1:::p:163:p, space :::p, comp FieldIdQuiz:::p:70:p}, comp InputSoalArea:::p:491:p}, space ::154:x, par l {comp label3:::p:93:p, par t:l::p {comp TombolSimpan::l:::x, comp PilihSoalKe::l:::x}, comp TombKembaliUpdateQuiz:::p::p}, space :p:30:p}}}}"
+				"$verticalGroup": "par l {seq l {space :p:14:p, par b {comp label1::b:p::p, comp FieldIdQuiz::b:p::p, comp TombKembaliUpdateQuiz::b:p::p}, space s:::p, comp label2:::p::p, space u:::p, par l {seq {comp label3:::p:32:p, space :::p, comp PilihSoalKe:::p::p, space :p:23:p, comp TombolSimpan:::p::p}, comp InputSoalArea:::p:305:p}, space ::130:x}}"
 			} ) {
 				name: "panel1"
 				"background": new java.awt.Color( 0, 153, 153, 255 )
@@ -28,10 +28,10 @@ new FormModel {
 					"foreground": &Color0 new java.awt.Color( 0, 0, 0, 255 )
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "beradaDiSoal"
+					name: "FieldIdQuiz"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "TextSoal"
+					name: "InputSoalArea"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
@@ -44,11 +44,11 @@ new FormModel {
 					"foreground": #Color0
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button1"
+					name: "TombolSimpan"
 					"text": "Simpan"
 				} )
 				add( new FormComponent( "javax.swing.JSpinner" ) {
-					name: "spinner1"
+					name: "PilihSoalKe"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "TombKembaliUpdateQuiz"
