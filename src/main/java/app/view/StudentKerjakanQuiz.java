@@ -210,7 +210,9 @@ public class StudentKerjakanQuiz extends JFrame {
         final String sql = "SELECT MIN(question_id) AS quiz_id FROM quiz WHERE quiz_title = ?";
         try (Connection c = DatabaseConnection.get();
              PreparedStatement ps = c.prepareStatement(sql)) {
-            ps.setString(1, quizTitle);
+            ps.setString(
+
+                    1, quizTitle);
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) return rs.getInt("quiz_id");
             }

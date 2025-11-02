@@ -17,6 +17,7 @@ import java.sql.*;
  * @author Asus
  */
 public class TeacherDashboard extends JFrame {
+    private final TeacherQuizController quizController = new TeacherQuizController();
     private int teacherId;
     public TeacherDashboard() {
         initComponents();
@@ -43,6 +44,8 @@ public class TeacherDashboard extends JFrame {
         TombHapusQuiz.addActionListener(e -> onDeleteQuiz());
 
         TombUpdateQuiz.addActionListener(e -> onUpdateQuiz());
+
+        TombLihatSkor.addActionListener(e -> onSeeScores());
 
     }
 
@@ -100,6 +103,17 @@ public class TeacherDashboard extends JFrame {
         }
     }
 
+    private void onSeeScores() {
+        int row = TableTeacherDashboard.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Pilih satu quiz di tabel dulu.");
+            return;
+        }
+        String quizTitle = TableTeacherDashboard.getValueAt(row, 1).toString(); // kolom "Nama Quiz"
+        new TeacherLihatSkor(teacherId, quizTitle).setVisible(true);
+        dispose(); // opsional
+    }
+
     // ===================== HAPUS QUIZ ======================
     private void onDeleteQuiz() {
         int row = TableTeacherDashboard.getSelectedRow();
@@ -120,7 +134,7 @@ public class TeacherDashboard extends JFrame {
         if (ok != JOptionPane.YES_OPTION) return;
 
         try {
-            int deleted = controller.deleteQuizByTitle(teacherId, quizTitle);
+            int deleted = quizController.deleteQuizByTitle(teacherId, quizTitle);
             JOptionPane.showMessageDialog(this,
                     "Terhapus: " + deleted + " baris soal untuk \"" + quizTitle + "\".");
 
@@ -164,6 +178,7 @@ public class TeacherDashboard extends JFrame {
         TombUpdateQuiz = new JButton();
         TombHapusQuiz = new JButton();
         TombolKembaliDashboard = new JButton();
+        TombLihatSkor = new JButton();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -178,12 +193,13 @@ public class TeacherDashboard extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x009999));
-            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder
-            ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border
-            .TitledBorder . BOTTOM, new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt
-            . Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void
-            propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( )
-            ;} } );
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new
+            javax . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax
+            . swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java
+            . awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt
+            . Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .
+            PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062ord\u0065r" .
+            equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
 
             //---- DaftarQuizTeacher ----
             DaftarQuizTeacher.setText("Daftar Quiz");
@@ -218,6 +234,9 @@ public class TeacherDashboard extends JFrame {
             //---- TombolKembaliDashboard ----
             TombolKembaliDashboard.setText("Kembali");
 
+            //---- TombLihatSkor ----
+            TombLihatSkor.setText("Lihat Skor");
+
             GroupLayout panel1Layout = new GroupLayout(panel1);
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
@@ -232,7 +251,8 @@ public class TeacherDashboard extends JFrame {
                             .addComponent(TombTambahQuiz, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(TombUpdateQuiz, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(TombHapusQuiz, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(TombolKembaliDashboard, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(TombolKembaliDashboard, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(TombLihatSkor, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap(26, Short.MAX_VALUE))
             );
             panel1Layout.setVerticalGroup(
@@ -253,7 +273,9 @@ public class TeacherDashboard extends JFrame {
                                 .addGap(35, 35, 35)
                                 .addComponent(TombUpdateQuiz)
                                 .addGap(32, 32, 32)
-                                .addComponent(TombHapusQuiz)))
+                                .addComponent(TombHapusQuiz)
+                                .addGap(38, 38, 38)
+                                .addComponent(TombLihatSkor)))
                         .addContainerGap(21, Short.MAX_VALUE))
             );
         }
@@ -295,6 +317,6 @@ public class TeacherDashboard extends JFrame {
     private JButton TombUpdateQuiz;
     private JButton TombHapusQuiz;
     private JButton TombolKembaliDashboard;
-    private TeacherQuizController controller = new TeacherQuizController();
+    private JButton TombLihatSkor;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }
