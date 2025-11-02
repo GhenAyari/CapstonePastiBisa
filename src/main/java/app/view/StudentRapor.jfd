@@ -17,8 +17,8 @@ new FormModel {
 				"foreground": new java.awt.Color( 51, 51, 51, 255 )
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :p:21:p, comp scrollPane1:::p:500:p, space :p:56:p, comp TombolKembaliRapor:::p:112:p, space ::115:x}}"
-				"$verticalGroup": "par l {seq l {space :p:67:p, par l {comp scrollPane1:::p:360:p, comp TombolKembaliRapor:::p::p}, space ::61:x}}"
+				"$horizontalGroup": "par l {seq l {space :p:21:p, comp scrollPane1:::p:599:p, space s:::p, comp TombolKembaliRapor:::p:112:p, space ::54:x}}"
+				"$verticalGroup": "par l {seq l {space :p:67:p, par l {comp scrollPane1:::p:372:p, comp TombolKembaliRapor:::p::p}, space ::49:x}}"
 			} ) {
 				name: "panel1"
 				"background": new java.awt.Color( 0, 153, 153, 255 )

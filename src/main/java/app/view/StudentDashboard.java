@@ -31,6 +31,11 @@ public class StudentDashboard extends JFrame {
         loadProfile();
         loadAllQuizForStudent();
 
+        TombLihatSkor.addActionListener(e -> {
+            new StudentRapor(this.studentId).setVisible(true);
+            dispose(); // opsional: kalau mau menutup dashboard saat pindah
+        });
+
         TombKerjakanQuiz.addActionListener(e -> onKerjakanQuiz());
 
 
