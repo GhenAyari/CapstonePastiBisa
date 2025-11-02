@@ -4,7 +4,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {seq {par l {comp HalloTeacher:::p:649:p, comp panel1:::p::p}, space :0:0:x}}"
+			"$horizontalGroup": "par l {seq {comp panel1:::::x, space :::p}, comp HalloTeacher::l::780:x}"
 			"$verticalGroup": "par l {seq l {comp HalloTeacher:::p::p, space :::p, comp panel1:::::x, space :::p}}"
 		} ) {
 			name: "this"
@@ -17,8 +17,8 @@ new FormModel {
 				"foreground": new java.awt.Color( 51, 51, 51, 255 )
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {comp label2:::p:163:p, space ::433:x}, seq t {par l {seq {comp label1:::p:163:p, space :::p, comp textField1:::p:70:p}, comp textField2::l:p:430:p}, space ::43:x, par l {comp label3:::p:93:p, par t:l::p {comp button1::l:::x, comp spinner1::l:::x}, comp button2:::p::p}, space :p:30:p}}}}"
-				"$verticalGroup": "par l {seq l {space :p:14:p, par b {comp label1::b:p::p, comp textField1::b:p::p, comp button2::b:p::p}, space s:::p, comp label2:::p::p, space u:::p, par l {seq {comp label3:::p:32:p, space :::p, comp spinner1:::p::p, space :p:23:p, comp button1:::p::p}, comp textField2:::p:179:p}, space ::224:x}}"
+				"$horizontalGroup": "par l {seq {space :::p, par l {seq l {comp label2:::p:163:p, space :::x}, seq t {par l {seq {comp label1:::p:163:p, space :::p, comp beradaDiSoal:::p:70:p}, comp TextSoal:::p:491:p}, space ::154:x, par l {comp label3:::p:93:p, par t:l::p {comp button1::l:::x, comp spinner1::l:::x}, comp TombKembaliUpdateQuiz:::p::p}, space :p:30:p}}}}"
+				"$verticalGroup": "par l {seq l {space :p:14:p, par b {comp label1::b:p::p, comp beradaDiSoal::b:p::p, comp TombKembaliUpdateQuiz::b:p::p}, space s:::p, comp label2:::p::p, space u:::p, par l {seq {comp label3:::p:32:p, space :::p, comp spinner1:::p::p, space :p:23:p, comp button1:::p::p}, comp TextSoal:::p:305:p}, space ::130:x}}"
 			} ) {
 				name: "panel1"
 				"background": new java.awt.Color( 0, 153, 153, 255 )
@@ -28,10 +28,10 @@ new FormModel {
 					"foreground": &Color0 new java.awt.Color( 0, 0, 0, 255 )
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textField1"
+					name: "beradaDiSoal"
 				} )
 				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textField2"
+					name: "TextSoal"
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
@@ -51,13 +51,13 @@ new FormModel {
 					name: "spinner1"
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button2"
+					name: "TombKembaliUpdateQuiz"
 					"text": "Kembali"
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 480, 460 )
+			"size": new java.awt.Dimension( 626, 486 )
 		} )
 	}
 }

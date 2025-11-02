@@ -42,6 +42,8 @@ public class TeacherDashboard extends JFrame {
         });
         TombHapusQuiz.addActionListener(e -> onDeleteQuiz());
 
+        TombUpdateQuiz.addActionListener(e -> onUpdateQuiz());
+
     }
 
 
@@ -130,6 +132,21 @@ public class TeacherDashboard extends JFrame {
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+    }
+    private void onUpdateQuiz() {
+        int row = TableTeacherDashboard.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this, "Pilih salah satu quiz dulu di tabel.");
+            return;
+        }
+
+        // Kolom: [0]=ID Quiz, [1]=Nama/Title, [2]=Jumlah Soal
+        int quizId = (int) TableTeacherDashboard.getValueAt(row, 0);
+        String quizTitle = TableTeacherDashboard.getValueAt(row, 1).toString();
+
+        // Buka form update dan kirim context (teacherId, quizId, quizTitle)
+        new app.view.TeacherUpdateQuiz(teacherId, quizId, quizTitle).setVisible(true);
+        dispose(); // tutup dashboard saat pindah (opsional)
     }
 
 
