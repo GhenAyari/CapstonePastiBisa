@@ -174,7 +174,11 @@ public class StudentKerjakanQuiz extends JFrame {
             char my = Character.toUpperCase(jawaban.getOrDefault(q.number, ' '));
             if (my == q.correct) benar++;
         }
-        int salah = soal.size() - benar;
+        int total = soal.size();
+        int salah = total - benar;
+
+// hitung nilai 0–100 proporsional
+        int nilai = (int) Math.round((benar * 100.0) / total);
 
         // quiz_id representatif = MIN(question_id) untuk quiz_title ini
         int quizId = fetchRepresentativeQuizId();
@@ -188,7 +192,7 @@ public class StudentKerjakanQuiz extends JFrame {
             ps.setInt(2, quizId);
             ps.setInt(3, salah);
             ps.setInt(4, benar);
-            ps.setInt(5, benar); // total_scores = jumlah benar
+            ps.setInt(5, nilai); // total_scores = jumlah benar
             ps.executeUpdate();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Gagal simpan nilai", JOptionPane.ERROR_MESSAGE);
@@ -196,7 +200,7 @@ public class StudentKerjakanQuiz extends JFrame {
         }
 
         JOptionPane.showMessageDialog(this,
-                "Terkumpul!\nBenar: " + benar + "\nSalah: " + salah + "\nSkor: " + benar);
+                "Terkumpul!\nBenar: " + benar + "\nSalah: " + salah + "\nNilai akhir: " + nilai);
 
         new StudentDashboard(studentId).setVisible(true);
         dispose();
