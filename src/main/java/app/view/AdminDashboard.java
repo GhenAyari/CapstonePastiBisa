@@ -7,9 +7,10 @@ package app.view;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.GroupLayout;
-
+import java.sql.*;
 import app.controller.AdminController;
 import javax.swing.table.DefaultTableModel;
+import app.utilities.data.DatabaseConnection;
 
 
 /**
@@ -32,20 +33,39 @@ public class AdminDashboard extends JFrame {
     }
 
     private void loadPending() {
-        try (var rs = controller.listPendingAll()) {
-            var m = new javax.swing.table.DefaultTableModel(
-                    new Object[]{"Nama", "Username", "ID", "Status"}, 0
-            ){ @Override public boolean isCellEditable(int r,int c){ return false; }};
+        final String sql =
+                "SELECT users_id AS id, name, username, 'TEACHER' AS role " +
+                        "FROM teacher WHERE is_verified = FALSE " +
+                        "UNION ALL " +
+                        "SELECT users_id AS id, name, username, 'STUDENT' AS role " +
+                        "FROM student WHERE is_verified = FALSE " +
+                        "ORDER BY role, id";
+
+        DefaultTableModel m = new DefaultTableModel(
+                new Object[]{"Nama", "Username", "ID", "Status"}, 0
+        ) {
+            @Override public boolean isCellEditable(int r, int c) { return false; }
+            @Override public Class<?> getColumnClass(int c) {
+                return c == 2 ? Integer.class : String.class; // kolom ID = Integer
+            }
+        };
+
+        try (Connection c = DatabaseConnection.get();
+             PreparedStatement ps = c.prepareStatement(sql);
+             ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                int id = rs.getInt("id");
-                String name = rs.getString("name");      // <-- pakai name
-                String uname = rs.getString("username"); // <-- pakai username
-                String role = rs.getString("role");
+                int id       = rs.getInt("id");
+                String name  = rs.getString("name");
+                String uname = rs.getString("username");
+                String role  = rs.getString("role");
                 m.addRow(new Object[]{name, uname, id, role});
             }
+
             TableAdmin.setModel(m);
-            try { var st=rs.getStatement(); if(st!=null){ var c=st.getConnection(); st.close(); if(c!=null)c.close(); } } catch(Exception ignore){}
+            // opsional: atur lebar kolom ID
+            TableAdmin.getColumnModel().getColumn(2).setMaxWidth(90);
+
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }

@@ -1,9 +1,13 @@
 package app.controller;
 
 import app.utilities.base.BaseController;
+import app.utilities.data.DatabaseConnection;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 
 public class AdminController extends BaseController {
 
@@ -17,9 +21,29 @@ public class AdminController extends BaseController {
     }
 
     // Approve = set verified true, Reject = hapus baris
-    public void verify(String role, int userId, boolean approve) throws SQLException {
+    public void verify(String role, int userId, boolean approve) throws Exception {
         String table = role.equalsIgnoreCase("TEACHER") ? "teacher" : "student";
-        if (approve) execUpdate("UPDATE " + table + " SET is_verified=TRUE WHERE users_id=?", userId);
-        else execUpdate("DELETE FROM " + table + " WHERE users_id=?", userId);
+        String sql;
+
+        if (approve)
+            sql = "UPDATE " + table + " SET is_verified = TRUE WHERE users_id = ?";
+        else
+            sql = "DELETE FROM " + table + " WHERE users_id = ?";
+
+        try (Connection c = DatabaseConnection.get();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            ps.executeUpdate();
+        }
+    }
+
+    public int rejectUser(String role, int userId) throws Exception {
+        String table = role.equalsIgnoreCase("TEACHER") ? "teacher" : "student";
+        String sql = "DELETE FROM " + table + " WHERE users_id = ?";
+        try (Connection c = DatabaseConnection.get();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setInt(1, userId);
+            return ps.executeUpdate();
+        }
     }
 }
