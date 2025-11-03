@@ -124,13 +124,26 @@ ghenayari/capstonepastibisa
 
 ## Cara Menggunakan Program
 
+
+Menu Login
 <img width="1157" height="864" alt="image" src="https://github.com/user-attachments/assets/441a083c-a4b5-44f4-9e8e-f7c7026fc2fd" />
+
+Menu ini berfungsi sebagai pintu masuk bagi pengguna untuk mengakses sistem. Terdapat beberapa komponen seperti kolom untuk memasukkan username, nama, dan password, serta tombol Login dan Register yang digunakan untuk masuk atau mendaftar akun baru. Selain itu, terdapat juga pilihan peran pengguna seperti Admin yang dapat dipilih sebelum login.
+
 
 <img width="1062" height="819" alt="image" src="https://github.com/user-attachments/assets/9d8a4239-0e2c-44db-b4e6-3868ee6db74e" />
 
+Bagian ini menunjukkan bahwa proses registrasi gagal karena username yang dimasukkan sudah pernah digunakan oleh pengguna lain. Jadi sistem otomatis menampilkan pesan “Username sudah dipakai” sebagai peringatan. Tujuannya biar setiap akun punya username yang unik dan tidak terjadi data ganda di dalam database.
+
+
 <img width="1075" height="800" alt="image" src="https://github.com/user-attachments/assets/01e7448b-e74b-4139-9e85-66839d560db7" />
 
+Bagian ini menunjukkan bahwa proses registrasi berhasil dilakukan. Setelah mengisi semua data dengan benar dan menekan tombol Register, sistem menampilkan pesan “Registrasi berhasil. Menunggu verifikasi admin.” Pesan ini berarti data sudah tersimpan di database, tapi akun belum bisa digunakan untuk login sebelum diverifikasi oleh admin terlebih dahulu.
+
+
 <img width="1077" height="827" alt="image" src="https://github.com/user-attachments/assets/f8523101-83f4-42cd-9dd3-fd729eb32e00" />
+
+Bagian ini menunjukkan bahwa proses verifikasi akun oleh admin telah berhasil dilakukan. Setelah admin memilih data pengguna yang ingin diverifikasi dan menekan tombol Verifikasi, sistem menampilkan pesan “Berhasil diverifikasi" yang menandakan bahwa akun pengguna tersebut sudah diverifikasi oleh admin dan kini dapat digunakan untuk login ke sistem.
 
 
 
