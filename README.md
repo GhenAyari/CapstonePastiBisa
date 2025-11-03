@@ -1,12 +1,3 @@
-| Kategori | Detail |
-| :--- | :--- |
-| **Nama** | Ghendida Gantari Ayari |
-| **NIM** | 2409116080 |
-| **Program Studi** | Sistem Informasi |
-| **Kelompok** | **19**
-
------
-
 
 
 # Quiz Sederhana
