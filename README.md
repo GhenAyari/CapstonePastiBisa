@@ -163,7 +163,7 @@ Bagian ini menunjukkan bahwa proses verifikasi akun oleh admin telah berhasil di
 <img width="1026" height="782" alt="image" src="https://github.com/user-attachments/assets/f876ae1d-ce16-47f8-8bd0-3afba2944aa1" />
 
 
-Bagian ini menunjukkan proses penghapusan quiz yang dilakukan oleh pengguna guru. Pertama, guru melakukan login ke dalam sistem dengan memasukkan username dan password yang valid. Setelah proses autentikasi berhasil, sistem menampilkan pesan “Login Teacher berhasil (id=16)” yang menandakan bahwa guru telah berhasil masuk dan dapat mengakses halaman utama.
+Bagian ini menunjukkan proses penghapusan quiz yang dilakukan oleh pengguna guru(teacher). Pertama, guru melakukan login ke dalam sistem dengan memasukkan username dan password yang valid. Setelah proses autentikasi berhasil, sistem menampilkan pesan “Login Teacher berhasil (id=16)” yang menandakan bahwa guru telah berhasil masuk dan dapat mengakses halaman utama.
 
 
 
@@ -214,6 +214,8 @@ Setelah seluruh soal selesai dimasukkan, guru menekan tombol “Simpan” untuk 
 Pesan tersebut mengindikasikan bahwa quiz baru telah berhasil disimpan bersama dengan seluruh soal yang telah dibuat. Setelah proses penyimpanan selesai, tampilan akan kembali ke halaman utama Teacher, di mana daftar quiz diperbarui secara otomatis. Quiz baru (Pengetahuan Umum) kini muncul pada tabel Daftar Quiz dengan informasi ID Quiz, Nama Quiz, dan Jumlah Soal.
 
 
+
+
 ### Mengerjakan quiz dan melihat skor
 
 <img width="932" height="807" alt="image" src="https://github.com/user-attachments/assets/9b68ff82-f4ac-4f44-a1ea-678120210aa3" />
@@ -251,29 +253,94 @@ Pesan ini menunjukkan hasil akhir dari pengerjaan quiz yang meliputi jumlah jawa
 
 <img width="994" height="801" alt="image" src="https://github.com/user-attachments/assets/49b4b241-cce1-4d5d-bfab-450c5712bca5" />
 
+Tampilan ini digunakan oleh guru untuk melihat hasil kuis yang telah dikerjakan siswa. Informasi yang ditampilkan meliputi nama siswa, nama kuis, dan nilai yang diperoleh.
+
+
+
 
 ### Teacher update quiz
 
 <img width="776" height="710" alt="image" src="https://github.com/user-attachments/assets/57bf9f9e-eb90-40b9-bbcf-6d1d210b3bda" />
 
+Pada tampilan ini, pengguna dengan peran Teacher dapat melihat daftar quiz yang telah dibuat.
+Setiap quiz ditampilkan dalam tabel yang berisi kolom ID Quiz, Nama Quiz, dan Jumlah Soal.
+Selain itu, disediakan beberapa tombol fungsi di sisi kanan, yaitu:
+
+Kembali: untuk kembali ke menu utama.
+
+Tambah Quiz: untuk membuat quiz baru.
+
+Update Quiz: untuk memperbarui isi atau pertanyaan pada quiz yang dipilih.
+
+Hapus Quiz: untuk menghapus quiz yang ada.
+
+Lihat Skor: untuk menampilkan hasil nilai siswa yang telah mengerjakan quiz.
+
+Kirim Pesan: untuk mengirimkan pesan kepada siswa.
+
+Seperti pada contoh di atas, terdapat satu quiz dengan nama “Pengetahuan Umum” yang memiliki 2 soal dan ID quiz 44.
+
+
+
 <img width="989" height="756" alt="image" src="https://github.com/user-attachments/assets/82bf0277-c630-4442-97d7-a5fee4566ad1" />
+
+Setelah memilih tombol Update Quiz, pengguna diarahkan ke halaman pengeditan soal.
+Pada bagian atas terdapat informasi ID Quiz yang sedang dibuka, yaitu 44. Teacher dapat menuliskan atau memperbarui soal pada area teks yang telah disediakan.
+Selain itu, tersedia fitur Pilih Soal Ke untuk menavigasi antar soal (misalnya soal ke-1 atau ke-2). Setelah selesai memperbarui isi soal, pengguna dapat menekan tombol Simpan untuk menyimpan perubahan.
+
+
 
 <img width="999" height="764" alt="image" src="https://github.com/user-attachments/assets/bbb96928-5192-42fc-ade7-2d8d37e82d52" />
 
+Setelah tombol Simpan ditekan, sistem menampilkan jendela pesan (pop-up) yang memberikan notifikasi bahwa proses penyimpanan berhasil.
+Pesan yang muncul adalah: “Soal #1 berhasil disimpan.”
+Hal ini menandakan bahwa data soal yang diperbarui telah tersimpan ke dalam database dan dapat ditampilkan oleh siswa saat mengerjakan quiz.
+
+
+
 <img width="713" height="458" alt="image" src="https://github.com/user-attachments/assets/1f594a93-8311-4d89-a948-e45752559b8a" />
+
+Tampilan ini merupakan antarmuka yang dilihat oleh pengguna dengan peran Student ketika mengerjakan quiz.
+Bagian atas menampilkan informasi quiz, yaitu:
+
+“Hallo, Student — Quiz: Pengetahuan Umum”
+
+Pada area utama terdapat pertanyaan yang telah dibuat oleh teacher:
+
+“1. Ibu berbelanja ke A) Sekolah B) Pasar C) Kebun D) Rumah”
+
+Siswa dapat memilih salah satu jawaban dengan menggunakan tombol radio button (A–D), kemudian menekan tombol Next untuk melanjutkan ke soal berikutnya.
+Tombol Kembali digunakan untuk keluar atau kembali ke halaman sebelumnya.
+
+
 
 
 ###  Teacher mengirim pesan ke student
 
 <img width="1097" height="691" alt="image" src="https://github.com/user-attachments/assets/daed18d9-44b9-4154-859e-31c869628d60" />
 
+Pada tampilan ini, pengguna dengan peran Teacher dapat mengirimkan pesan atau umpan balik kepada siswa yang terdaftar dalam sistem. Bagian atas halaman menampilkan tabel berisi daftar siswa dengan kolom ID, Username Siswa, dan Nama Siswa. Guru dapat memilih salah satu siswa dari daftar tersebut untuk dijadikan penerima pesan.
+Di bawah tabel, tersedia area teks yang digunakan untuk menuliskan isi pesan. Setelah pesan selesai diketik, guru dapat menekan tombol “Kirim” untuk mengirimkan pesan kepada siswa, atau tombol “Kembali” untuk kembali ke menu sebelumnya. Tampilan ini memfasilitasi interaksi langsung antara guru dan siswa secara terarah melalui sistem.
+
+
+
 <img width="1098" height="690" alt="image" src="https://github.com/user-attachments/assets/d754cd22-548a-4854-8093-5e74cfcdad2f" />
 
+Setelah guru menekan tombol “Kirim”, sistem akan menampilkan kotak dialog konfirmasi dengan pesan “Pesan terkirim!”. Notifikasi ini berfungsi sebagai indikator bahwa proses pengiriman pesan telah berhasil dilakukan dan pesan telah tersimpan di dalam sistem. Sebagai pada gambar, pesan bertuliskan “Hallo Broto” berhasil dikirim oleh teacher kepada siswa bernama Broto. Pesan ini akan otomatis tersimpan di basis data dan dapat dilihat oleh siswa melalui menu feedback mereka.
+
+
+
 <img width="1002" height="775" alt="image" src="https://github.com/user-attachments/assets/af7208af-5590-42cd-a369-1d2fc45a1568" />
+
+Pada tampilan ini, siswa dapat melihat pesan atau umpan balik yang dikirim oleh guru. Di bagian atas, terdapat tabel yang berisi daftar guru yang pernah mengirimkan pesan kepada siswa tersebut, lengkap dengan kolom Nama Teacher dan ID Feedback. Ketika siswa memilih salah satu entri dari tabel, isi pesan dari guru yang bersangkutan akan muncul pada kolom teks di bagian bawah. Misalnya, dalam gambar terlihat bahwa siswa dengan ID 2 menerima pesan dari teacher bernama pras yang berisi “Hallo Broto”.
+Tampilan ini memungkinkan siswa untuk membaca umpan balik yang dikirim oleh guru secara langsung, serta menyediakan tombol “Kembali” untuk kembali ke menu sebelumnya setelah pesan dibaca.
+
+
 
 
 ### Teacher hanya bisa melihat quiz yang dibuat sendiri dan tidak bisa melihat quiz yang guru lain buat
 
 <img width="764" height="710" alt="image" src="https://github.com/user-attachments/assets/8d0f05c2-8560-4b0e-a5bb-d603ca01ecab" />
 
+Pada tampilan ini menampilkan daftar kuis yang telah dibuat oleh guru. Setiap guru hanya dapat melihat dan mengelola kuis miliknya sendiri, tanpa dapat mengakses kuis buatan guru lain. Tabel berisi informasi ID Quiz, Nama Quiz, dan Jumlah Soal, sedangkan di sisi kanan tersedia tombol untuk menambah, memperbarui, menghapus, serta melihat skor kuis. Fitur ini memudahkan guru dalam mengatur dan memantau kegiatan kuis secara mandiri.
 
