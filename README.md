@@ -150,14 +150,24 @@ Bagian ini menunjukkan bahwa proses verifikasi akun oleh admin telah berhasil di
 
 <img width="1026" height="782" alt="image" src="https://github.com/user-attachments/assets/f876ae1d-ce16-47f8-8bd0-3afba2944aa1" />
 
+Bagian ini menunjukkan proses penghapusan quiz yang dilakukan oleh pengguna guru. Pertama, guru melakukan login ke dalam sistem dengan memasukkan username dan password yang valid. Setelah proses autentikasi berhasil, sistem menampilkan pesan “Login Teacher berhasil (id=16)” yang menandakan bahwa guru telah berhasil masuk dan dapat mengakses halaman utama.
+
 
 <img width="759" height="706" alt="image" src="https://github.com/user-attachments/assets/ee0e88ef-7100-41dd-a082-e33435d81e40" />
+
+Selanjutnya, ketika guru memilih salah satu quiz yang ingin dihapus (misalnya Quiz Coba) dan menekan tombol “Hapus Quiz”, sistem akan menampilkan dialog konfirmasi dengan pesan: “Hapus quiz ‘Quiz Coba’ beserta 3 soal?”
+Pesan konfirmasi tersebut berfungsi untuk memastikan bahwa pengguna benar-benar ingin menghapus quiz tersebut beserta seluruh soal yang terkait, guna mencegah terjadinya penghapusan data secara tidak disengaja.
 
 
 <img width="763" height="705" alt="image" src="https://github.com/user-attachments/assets/2bb179a0-9043-4890-ad4f-328ed134f0ce" />
 
+Apabila guru menekan tombol “Yes”, sistem akan melanjutkan proses penghapusan dengan menghapus seluruh data soal yang terhubung dengan quiz tersebut dari basis data, kemudian menghapus data quiz itu sendiri. Setelah proses penghapusan selesai, sistem menampilkan pesan: “Terhapus: 3 baris soal untuk ‘Quiz Coba’.”
+Pesan ini menandakan bahwa proses penghapusan telah berhasil dilakukan. Selanjutnya, tampilan daftar quiz akan diperbarui secara otomatis, di mana quiz yang telah dihapus tidak lagi ditampilkan dalam tabel.
+
 
 <img width="756" height="714" alt="image" src="https://github.com/user-attachments/assets/90dcab04-a68d-4fb4-b6da-0b90e5da7c7a" />
+
+
 
 
 ### Tambah Quiz
@@ -213,6 +223,6 @@ Bagian ini menunjukkan bahwa proses verifikasi akun oleh admin telah berhasil di
 
 ### Teacher hanya bisa melihat quiz yang dibuat sendiri dan tidak bisa melihat quiz yang guru lain buat
 
-<img width="764" height="710" alt="image" src="https://github.com/user-attachments/assets/a2bb6a88-a6c1-4934-a1d9-cfaf1b193649" />
+<img width="764" height="710" alt="image" src="https://github.com/user-attachments/assets/8d0f05c2-8560-4b0e-a5bb-d603ca01ecab" />
 
-<img width="764" height="710" alt="image" src="https://github.com/user-attachments/assets/af86e0f7-bb65-4539-a439-bc72983afd85" />
+
