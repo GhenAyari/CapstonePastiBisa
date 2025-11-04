@@ -146,11 +146,17 @@ Bagian ini menunjukkan bahwa proses registrasi berhasil dilakukan. Setelah mengi
 Bagian ini menunjukkan bahwa proses verifikasi akun oleh admin telah berhasil dilakukan. Setelah admin memilih data pengguna yang ingin diverifikasi dan menekan tombol Verifikasi, sistem menampilkan pesan “Berhasil diverifikasi" yang menandakan bahwa akun pengguna tersebut sudah diverifikasi oleh admin dan kini dapat digunakan untuk login ke sistem.
 
 
+
+
+
+
 ### Hapus Quiz
 
 <img width="1026" height="782" alt="image" src="https://github.com/user-attachments/assets/f876ae1d-ce16-47f8-8bd0-3afba2944aa1" />
 
+
 Bagian ini menunjukkan proses penghapusan quiz yang dilakukan oleh pengguna guru. Pertama, guru melakukan login ke dalam sistem dengan memasukkan username dan password yang valid. Setelah proses autentikasi berhasil, sistem menampilkan pesan “Login Teacher berhasil (id=16)” yang menandakan bahwa guru telah berhasil masuk dan dapat mengakses halaman utama.
+
 
 
 <img width="759" height="706" alt="image" src="https://github.com/user-attachments/assets/ee0e88ef-7100-41dd-a082-e33435d81e40" />
@@ -159,10 +165,12 @@ Selanjutnya, ketika guru memilih salah satu quiz yang ingin dihapus (misalnya Qu
 Pesan konfirmasi tersebut berfungsi untuk memastikan bahwa pengguna benar-benar ingin menghapus quiz tersebut beserta seluruh soal yang terkait, guna mencegah terjadinya penghapusan data secara tidak disengaja.
 
 
+
 <img width="763" height="705" alt="image" src="https://github.com/user-attachments/assets/2bb179a0-9043-4890-ad4f-328ed134f0ce" />
 
 Apabila guru menekan tombol “Yes”, sistem akan melanjutkan proses penghapusan dengan menghapus seluruh data soal yang terhubung dengan quiz tersebut dari basis data, kemudian menghapus data quiz itu sendiri. Setelah proses penghapusan selesai, sistem menampilkan pesan: “Terhapus: 3 baris soal untuk ‘Quiz Coba’.”
 Pesan ini menandakan bahwa proses penghapusan telah berhasil dilakukan. Selanjutnya, tampilan daftar quiz akan diperbarui secara otomatis, di mana quiz yang telah dihapus tidak lagi ditampilkan dalam tabel.
+
 
 
 <img width="756" height="714" alt="image" src="https://github.com/user-attachments/assets/90dcab04-a68d-4fb4-b6da-0b90e5da7c7a" />
@@ -174,13 +182,28 @@ Pesan ini menandakan bahwa proses penghapusan telah berhasil dilakukan. Selanjut
 
 <img width="827" height="701" alt="image" src="https://github.com/user-attachments/assets/b7be9f3d-c4ab-43c6-827a-f985f09c0fe6" />
 
+Bagian ini menunjukkan bahwa proses penambahan quiz baru oleh pengguna dengan peran guru (teacher) telah berhasil dilakukan.
+
+
+
 <img width="806" height="686" alt="image" src="https://github.com/user-attachments/assets/fd84af0d-1187-4793-9d07-83cae5ea8371" />
+
+Pada tahap awal, guru mengisi nama quiz pada kolom Masukkan Nama Quiz, kemudian menuliskan pertanyaan beserta pilihan jawaban (A, B, C, D) pada kolom Masukkan Soal.
+
+
 
 <img width="831" height="705" alt="image" src="https://github.com/user-attachments/assets/4269a3a9-ebee-447c-a5aa-d6e922d1f23a" />
 
+Setelah itu, guru memilih jawaban yang benar melalui dropdown di sebelah kiri tampilan, dan menekan tombol “Simpan Next” untuk menyimpan soal sekaligus melanjutkan ke pertanyaan berikutnya. Setiap kali satu soal berhasil disimpan, sistem akan menampilkan pesan konfirmasi, seperti: “Soal #2 disimpan. Lanjut soal #3.”
+Pesan ini menandakan bahwa data soal telah berhasil dimasukkan ke dalam basis data dan guru dapat melanjutkan penambahan soal selanjutnya.
+
+
+
 <img width="766" height="713" alt="image" src="https://github.com/user-attachments/assets/776eb31d-73ab-4acf-8392-7299503af31e" />
 
-<img width="766" height="713" alt="image" src="https://github.com/user-attachments/assets/d75826c0-6ff5-49b3-b85f-c574e435c4f3" />
+Setelah seluruh soal selesai dimasukkan, guru menekan tombol “Simpan” untuk menyelesaikan proses pembuatan quiz. Sistem kemudian menampilkan pesan konfirmasi:
+“Quiz ‘Pengetahuan Umum’ tersimpan dengan 2 soal.”
+Pesan tersebut mengindikasikan bahwa quiz baru telah berhasil disimpan bersama dengan seluruh soal yang telah dibuat. Setelah proses penyimpanan selesai, tampilan akan kembali ke halaman utama Teacher, di mana daftar quiz diperbarui secara otomatis. Quiz baru (Pengetahuan Umum) kini muncul pada tabel Daftar Quiz dengan informasi ID Quiz, Nama Quiz, dan Jumlah Soal.
 
 
 ### Mengerjakan quiz dan melihat skor
