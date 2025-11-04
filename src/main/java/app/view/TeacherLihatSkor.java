@@ -34,6 +34,7 @@ public class TeacherLihatSkor extends JFrame {
         this.quizTitle = quizTitle;
 
         initComponents();
+        tuneColumns();
         setTitle("Skor: " + quizTitle);
         setLocationRelativeTo(null);
 
@@ -85,6 +86,7 @@ public class TeacherLihatSkor extends JFrame {
                     });
                 }
                 table1.setModel(m);
+                tuneColumns();
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Gagal memuat skor", JOptionPane.ERROR_MESSAGE);
@@ -139,12 +141,11 @@ public class TeacherLihatSkor extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x009999));
-            panel1.setBorder(new javax.swing.border.CompoundBorder(new javax.swing.border.TitledBorder(new javax.swing.border
-            .EmptyBorder(0,0,0,0), "JF\u006frmDes\u0069gner \u0045valua\u0074ion",javax.swing.border.TitledBorder.CENTER,javax
-            .swing.border.TitledBorder.BOTTOM,new java.awt.Font("D\u0069alog",java.awt.Font.BOLD,
-            12),java.awt.Color.red),panel1. getBorder()));panel1. addPropertyChangeListener(new java.beans
-            .PropertyChangeListener(){@Override public void propertyChange(java.beans.PropertyChangeEvent e){if("\u0062order".equals(e.
-            getPropertyName()))throw new RuntimeException();}});
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder( 0
+            , 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
+            , new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,
+            panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
+            ) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
 
             //======== scrollPane1 ========
             {
@@ -160,6 +161,20 @@ public class TeacherLihatSkor extends JFrame {
                     }
                 ));
                 scrollPane1.setViewportView(table1);
+
+                // >>> atur perilaku resize dan lebar kolom
+                table1.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS); // tabel tetap responsif
+
+                javax.swing.table.TableColumnModel cm = table1.getColumnModel();
+                cm.getColumn(0).setPreferredWidth(70);   // ID Rapor
+                cm.getColumn(1).setPreferredWidth(60);   // ID Quiz
+                cm.getColumn(2).setPreferredWidth(140);  // Nama Student
+                cm.getColumn(3).setPreferredWidth(80);   // Is Correct
+                cm.getColumn(4).setPreferredWidth(80);   // Incorrect
+                cm.getColumn(5).setPreferredWidth(80);   // Score
+                cm.getColumn(6).setPreferredWidth(220);  // Date - dibuat lebih lebar
+// <<< akhir pengaturan kolom
+
             }
 
             //---- TombolKembaliLihatSkor ----
@@ -172,27 +187,26 @@ public class TeacherLihatSkor extends JFrame {
             panel1.setLayout(panel1Layout);
             panel1Layout.setHorizontalGroup(
                 panel1Layout.createParallelGroup()
-                    .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(scrollPane1, GroupLayout.PREFERRED_SIZE, 615, GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
-                        .addGroup(panel1Layout.createParallelGroup()
-                            .addComponent(TombolKembaliLihatSkor)
-                            .addComponent(TombolHapusLihatSkor, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE))
+                    .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                            .addComponent(scrollPane1, GroupLayout.Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+                            .addGroup(GroupLayout.Alignment.LEADING, panel1Layout.createSequentialGroup()
+                                .addGap(0, 548, Short.MAX_VALUE)
+                                .addComponent(TombolHapusLihatSkor, GroupLayout.PREFERRED_SIZE, 86, GroupLayout.PREFERRED_SIZE)
+                                .addGap(31, 31, 31)
+                                .addComponent(TombolKembaliLihatSkor)))
                         .addGap(29, 29, 29))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
                     .addGroup(panel1Layout.createSequentialGroup()
-                        .addGap(82, 82, 82)
-                        .addGroup(panel1Layout.createParallelGroup()
-                            .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 469, Short.MAX_VALUE)
-                            .addGroup(GroupLayout.Alignment.TRAILING, panel1Layout.createSequentialGroup()
-                                .addComponent(TombolKembaliLihatSkor)
-                                .addGap(34, 34, 34)
-                                .addComponent(TombolHapusLihatSkor)
-                                .addGap(0, 375, Short.MAX_VALUE)))
-                        .addContainerGap())
+                        .addGap(15, 15, 15)
+                        .addGroup(panel1Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
+                            .addComponent(TombolKembaliLihatSkor)
+                            .addComponent(TombolHapusLihatSkor))
+                        .addGap(37, 37, 37)
+                        .addComponent(scrollPane1, GroupLayout.DEFAULT_SIZE, 475, Short.MAX_VALUE))
             );
         }
 
@@ -218,6 +232,18 @@ public class TeacherLihatSkor extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
+    }
+
+    private void tuneColumns() {
+        table1.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        var cm = table1.getColumnModel();
+        cm.getColumn(0).setPreferredWidth(70);
+        cm.getColumn(1).setPreferredWidth(60);
+        cm.getColumn(2).setPreferredWidth(140);
+        cm.getColumn(3).setPreferredWidth(80);
+        cm.getColumn(4).setPreferredWidth(80);
+        cm.getColumn(5).setPreferredWidth(80);
+        cm.getColumn(6).setPreferredWidth(220);
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off

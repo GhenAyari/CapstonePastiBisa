@@ -132,13 +132,12 @@ public class Login extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x006666));
-            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new
-            javax . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JF\u006frmDes\u0069gner \u0045valua\u0074ion" , javax
-            . swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java
-            . awt .Font ( "D\u0069alog", java .awt . Font. BOLD ,12 ) ,java . awt
-            . Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .
-            PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "\u0062order" .
-            equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
+            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
+            EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing
+            . border. TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ),
+            java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
+            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName () ))
+            throw new RuntimeException( ); }} );
 
             //======== panel2 ========
             {
@@ -172,7 +171,7 @@ public class Login extends JFrame {
                 TombLogin.setText("Login");
 
                 //---- TombRegister ----
-                TombRegister.setText("Register");
+                TombRegister.setText("Daftar");
 
                 //---- TombRole ----
                 TombRole.setModel(new DefaultComboBoxModel<>(new String[] {
@@ -236,7 +235,7 @@ public class Login extends JFrame {
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(124, 124, 124)
                         .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(230, Short.MAX_VALUE))
+                        .addContainerGap(258, Short.MAX_VALUE))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()

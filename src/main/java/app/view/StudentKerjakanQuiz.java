@@ -76,27 +76,23 @@ public class StudentKerjakanQuiz extends JFrame {
     /** Ambil daftar soal untuk quizTitle ini */
     private void loadQuestions() {
         final String sql =
-                "SELECT question_number, " +
-                        "       COALESCE(question_text, soal) AS qtext, " +  // <-- fallback ke kolom 'soal' jika question_text null
-                        "       option_a, option_b, option_c, option_d, correct_answer " +
+                // pakai COALESCE supaya kalau question_text kosong, ambil 'soal'
+                "SELECT question_number, COALESCE(question_text, soal) AS teks, correct_answer " +
                         "FROM quiz WHERE quiz_title = ? ORDER BY question_number";
 
         try (Connection c = DatabaseConnection.get();
              PreparedStatement ps = c.prepareStatement(sql)) {
             ps.setString(1, quizTitle);
             try (ResultSet rs = ps.executeQuery()) {
+                soal.clear();
                 while (rs.next()) {
                     Q q = new Q();
                     q.number  = rs.getInt("question_number");
-                    q.text    = rs.getString("qtext");       // <-- pakai alias qtext
-                    q.a       = rs.getString("option_a");
-                    q.b       = rs.getString("option_b");
-                    q.c       = rs.getString("option_c");
-                    q.d       = rs.getString("option_d");
+                    q.text    = rs.getString("teks");       // <— ambil dari alias 'teks'
+                    q.a = q.b = q.c = q.d = null;           // opsi tidak dipakai lagi
                     String corr = rs.getString("correct_answer");
                     q.correct = (corr != null && !corr.isEmpty())
-                            ? Character.toUpperCase(corr.charAt(0))
-                            : 'A';
+                            ? Character.toUpperCase(corr.charAt(0)) : 'A';
                     soal.add(q);
                 }
             }
@@ -104,6 +100,7 @@ public class StudentKerjakanQuiz extends JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Gagal load soal", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 
 
     /** Render 1 soal ke UI berdasarkan index aktif */
@@ -116,11 +113,11 @@ public class StudentKerjakanQuiz extends JFrame {
         // isi area soal
         SoaKerjakanQuiz.setText("Soal #" + q.number + "\n\n" + (q.text == null ? "" : q.text));
 
-        // set text radio
-        PilganStudentA.setText("A  " + (q.a == null ? "" : q.a));
-        PilganStudentB.setText("B  " + (q.b == null ? "" : q.b));
-        PilganStudentC.setText("C  " + (q.c == null ? "" : q.c));
-        PilganStudentD.setText("D  " + (q.d == null ? "" : q.d));
+// radio cukup huruf A/B/C/D (tanpa deskripsi opsi)
+        PilganStudentA.setText("A");
+        PilganStudentB.setText("B");
+        PilganStudentC.setText("C");
+        PilganStudentD.setText("D");
 
         // restore jawaban jika sudah ada
         group.clearSelection();

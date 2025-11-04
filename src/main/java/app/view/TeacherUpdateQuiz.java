@@ -20,12 +20,6 @@ public class TeacherUpdateQuiz extends JFrame {
     private String quizTitle;
     private int maxSoal = 1;     // jumlah soal pada quiz ini
 
-//    // ---------- KOMPONEN (pastikan namanya sama dengan di formmu) ----------
-//    private JButton TombKembaliUpdateQuiz;
-//    private JButton TombolSimpan;            // tombol simpan
-//    private JSpinner PilihSoalKe;            // spinner pilih soal
-//    private JTextArea InputSoalArea;         // area teks soal
-//    private JTextField FieldIdQuiz;          // menampilkan ID quiz (readonly)
 
     // ---------- CONSTRUCTOR ----------
     public TeacherUpdateQuiz(int teacherId, int quizId, String quizTitle) {
@@ -119,6 +113,7 @@ public class TeacherUpdateQuiz extends JFrame {
 
         final String sql = "UPDATE quiz SET soal=? " +
                 "WHERE teacher_id=? AND quiz_title=? AND question_number=?";
+
         try (var c = DatabaseConnection.get();
              var ps = c.prepareStatement(sql)) {
             ps.setString(1, teks);
@@ -138,6 +133,8 @@ public class TeacherUpdateQuiz extends JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Gagal menyimpan", JOptionPane.ERROR_MESSAGE);
         }
     }
+
+
 
 
 

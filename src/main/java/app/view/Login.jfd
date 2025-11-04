@@ -17,7 +17,7 @@ new FormModel {
 				"foreground": new java.awt.Color( 51, 51, 51, 255 )
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :p:124:p, comp panel2:::p::p, space ::230:x}}"
+				"$horizontalGroup": "par l {seq l {space :p:124:p, comp panel2:::p::p, space ::258:x}}"
 				"$verticalGroup": "par l {seq l {space :p:49:p, comp panel2:::p::p, space ::143:x}}"
 			} ) {
 				name: "panel1"
@@ -64,7 +64,7 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "TombRegister"
-						"text": "Register"
+						"text": "Daftar"
 					} )
 					add( new FormComponent( "javax.swing.JComboBox" ) {
 						name: "TombRole"

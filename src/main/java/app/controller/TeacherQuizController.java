@@ -12,22 +12,25 @@ import java.util.List;
 
 public class TeacherQuizController extends BaseController {
 
-    public void saveBatch(int teacherId, String quizTitle, List<QuestionItem> items) throws SQLException {
-        // versi minimal agar cocok dengan tabel kamu sekarang
-        final String sql =
-                "INSERT INTO quiz (teacher_id, quiz_title, soal, correct_answer, question_number) " +
-                        "VALUES (?, ?, ?, ?, ?)";
+    public void saveBatch(int teacherId, String quizTitle, List<QuestionItem> items) throws Exception {
+        String sql = "INSERT INTO quiz (teacher_id, quiz_title, soal, correct_answer, question_number) " +
+                "VALUES (?, ?, ?, ?, ?)";
 
-        for (QuestionItem it : items) {
-            execUpdate(sql,
-                    teacherId,
-                    quizTitle,
-                    it.getQuestion(),                 // soal (pertanyaan)
-                    String.valueOf(it.getCorrect()),  // 'A'/'B'/'C'/'D'
-                    it.getNumber()
-            );
+        try (Connection c = DatabaseConnection.get();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+
+            for (QuestionItem it : items) {
+                ps.setInt(1, teacherId);
+                ps.setString(2, quizTitle);
+                ps.setString(3, it.getQuestion());         // simpan ke kolom 'soal'
+                ps.setString(4, String.valueOf(it.getCorrect())); // 'A'/'B'/'C'/'D'
+                ps.setInt(5, it.getNumber());
+                ps.addBatch();
+            }
+            ps.executeBatch();
         }
     }
+
     // Ringkasan quiz per guru: satu baris per quiz_title
     public ResultSet listQuizSummary(int teacherId) throws SQLException {
         String sql =

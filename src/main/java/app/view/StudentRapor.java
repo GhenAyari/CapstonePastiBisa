@@ -31,6 +31,8 @@ public class StudentRapor extends JFrame {
         initComponents();
         setTitle("Rapor - Student ID: " + studentId);
         setLocationRelativeTo(null);
+        // Atur lebar kolom
+        tuneColumns();
 
         TombolKembaliRapor.addActionListener(e -> {
             new StudentDashboard(studentId).setVisible(true);
@@ -67,6 +69,7 @@ public class StudentRapor extends JFrame {
                     });
                 }
                 TableRapor.setModel(model);
+                tuneColumns();
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Error memuat skor", JOptionPane.ERROR_MESSAGE);
@@ -164,6 +167,23 @@ public class StudentRapor extends JFrame {
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents  @formatter:on
+    }
+    private void tuneColumns() {
+        // Matikan auto-resize supaya kolom bisa punya lebar yang kita tentukan
+            TableRapor.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        var cm = TableRapor.getColumnModel();
+        // Index kolom berdasarkan header yang terlihat di screenshot:
+        // 0: Id Rapor, 1: Quiz ID, 2: Is Incorrect, 3: Is Correct, 4: Total Scores, 5: Date
+        cm.getColumn(0).setPreferredWidth(70);
+        cm.getColumn(1).setPreferredWidth(60);
+        cm.getColumn(2).setPreferredWidth(90);
+        cm.getColumn(3).setPreferredWidth(90);
+        cm.getColumn(4).setPreferredWidth(100);
+
+        // Buat Date lebar supaya tidak terpotong
+        cm.getColumn(5).setMinWidth(200);
+        cm.getColumn(5).setPreferredWidth(240);
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables  @formatter:off
