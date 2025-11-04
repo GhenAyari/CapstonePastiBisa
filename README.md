@@ -116,7 +116,15 @@ ghenayari/capstonepastibisa
 
 
 
-## Library
+## 🛠️ Dependencies / Library yang Digunakan
+
+Program ini dibangun menggunakan **Java SE** (JDK 24) dan menggunakan **Maven** sebagai *build tool*. dan menggunakan Intelij Idea sebagai IDE
+
+| Library | Deskripsi | Versi | Sumber/File |
+| :--- | :--- | :--- | :--- |
+| **MySQL Connector/J** | Driver JDBC resmi untuk koneksi ke database MySQL. | `9.0.0` | `pom.xml` |
+| **Java Swing** | Digunakan untuk membangun antarmuka pengguna (GUI) berbasis desktop. | *(Bagian dari JDK)* | Kelas-kelas `app.view.*` |
+| **JFormDesigner** | Alat bantu desain GUI yang menghasilkan kode form (`.jfd` file) dan inisialisasi komponen UI di Java. | *(Eksternal Tool)* | File-file `*.jfd` |
 
 
 
