@@ -141,11 +141,13 @@ public class TeacherLihatSkor extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x009999));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border. EmptyBorder( 0
-            , 0, 0, 0) , "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn", javax. swing. border. TitledBorder. CENTER, javax. swing. border. TitledBorder. BOTTOM
-            , new java .awt .Font ("Dia\u006cog" ,java .awt .Font .BOLD ,12 ), java. awt. Color. red) ,
-            panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( ){ @Override public void propertyChange (java .beans .PropertyChangeEvent e
-            ) {if ("\u0062ord\u0065r" .equals (e .getPropertyName () )) throw new RuntimeException( ); }} );
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new
+            javax . swing. border .EmptyBorder ( 0, 0 ,0 , 0) ,  "JFor\u006dDesi\u0067ner \u0045valu\u0061tion" , javax
+            . swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM, new java
+            . awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt
+            . Color .red ) ,panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .
+            PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e) { if( "bord\u0065r" .
+            equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
 
             //======== scrollPane1 ========
             {
@@ -161,20 +163,6 @@ public class TeacherLihatSkor extends JFrame {
                     }
                 ));
                 scrollPane1.setViewportView(table1);
-
-                // >>> atur perilaku resize dan lebar kolom
-                table1.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS); // tabel tetap responsif
-
-                javax.swing.table.TableColumnModel cm = table1.getColumnModel();
-                cm.getColumn(0).setPreferredWidth(70);   // ID Rapor
-                cm.getColumn(1).setPreferredWidth(60);   // ID Quiz
-                cm.getColumn(2).setPreferredWidth(140);  // Nama Student
-                cm.getColumn(3).setPreferredWidth(80);   // Is Correct
-                cm.getColumn(4).setPreferredWidth(80);   // Incorrect
-                cm.getColumn(5).setPreferredWidth(80);   // Score
-                cm.getColumn(6).setPreferredWidth(220);  // Date - dibuat lebih lebar
-// <<< akhir pengaturan kolom
-
             }
 
             //---- TombolKembaliLihatSkor ----

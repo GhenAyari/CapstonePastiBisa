@@ -114,10 +114,10 @@ public class Login extends JFrame {
         InputNamaLogin = new JTextField();
         label2 = new JLabel();
         label3 = new JLabel();
-        InputPasswordLogin = new JTextField();
         TombLogin = new JButton();
         TombRegister = new JButton();
         TombRole = new JComboBox<>();
+        InputPasswordLogin = new JPasswordField();
 
         //======== this ========
         var contentPane = getContentPane();
@@ -132,12 +132,11 @@ public class Login extends JFrame {
         //======== panel1 ========
         {
             panel1.setBackground(new Color(0x006666));
-            panel1.setBorder (new javax. swing. border. CompoundBorder( new javax .swing .border .TitledBorder (new javax. swing. border.
-            EmptyBorder( 0, 0, 0, 0) , "JF\u006frmDesi\u0067ner Ev\u0061luatio\u006e", javax. swing. border. TitledBorder. CENTER, javax. swing
-            . border. TitledBorder. BOTTOM, new java .awt .Font ("Dialo\u0067" ,java .awt .Font .BOLD ,12 ),
-            java. awt. Color. red) ,panel1. getBorder( )) ); panel1. addPropertyChangeListener (new java. beans. PropertyChangeListener( )
-            { @Override public void propertyChange (java .beans .PropertyChangeEvent e) {if ("borde\u0072" .equals (e .getPropertyName () ))
-            throw new RuntimeException( ); }} );
+            panel1.setBorder ( new javax . swing. border .CompoundBorder ( new javax . swing. border .TitledBorder ( new javax . swing. border .EmptyBorder ( 0
+            , 0 ,0 , 0) ,  "JF\u006frmD\u0065sig\u006eer \u0045val\u0075ati\u006fn" , javax. swing .border . TitledBorder. CENTER ,javax . swing. border .TitledBorder . BOTTOM
+            , new java. awt .Font ( "Dia\u006cog", java .awt . Font. BOLD ,12 ) ,java . awt. Color .red ) ,
+            panel1. getBorder () ) ); panel1. addPropertyChangeListener( new java. beans .PropertyChangeListener ( ){ @Override public void propertyChange (java . beans. PropertyChangeEvent e
+            ) { if( "\u0062ord\u0065r" .equals ( e. getPropertyName () ) )throw new RuntimeException( ) ;} } );
 
             //======== panel2 ========
             {
@@ -164,9 +163,6 @@ public class Login extends JFrame {
                 label3.setBackground(Color.black);
                 label3.setForeground(Color.black);
 
-                //---- InputPasswordLogin ----
-                InputPasswordLogin.setBackground(new Color(0x009999));
-
                 //---- TombLogin ----
                 TombLogin.setText("Login");
 
@@ -180,6 +176,9 @@ public class Login extends JFrame {
                     "Student"
                 }));
 
+                //---- InputPasswordLogin ----
+                InputPasswordLogin.setBackground(new Color(0x009999));
+
                 GroupLayout panel2Layout = new GroupLayout(panel2);
                 panel2.setLayout(panel2Layout);
                 panel2Layout.setHorizontalGroup(
@@ -188,21 +187,23 @@ public class Login extends JFrame {
                             .addContainerGap()
                             .addGroup(panel2Layout.createParallelGroup()
                                 .addGroup(panel2Layout.createSequentialGroup()
-                                    .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(label1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(label2, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(label3, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(InputUsernameLogin, GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
-                                        .addComponent(InputNamaLogin)
-                                        .addComponent(InputPasswordLogin))
-                                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(panel2Layout.createSequentialGroup()
                                     .addComponent(TombLogin)
                                     .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                     .addComponent(TombRegister, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                                     .addGap(18, 18, 18)
                                     .addComponent(TombRole, GroupLayout.PREFERRED_SIZE, 152, GroupLayout.PREFERRED_SIZE)
-                                    .addGap(43, 43, 43))))
+                                    .addGap(43, 43, 43))
+                                .addGroup(panel2Layout.createSequentialGroup()
+                                    .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(label1, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(label2, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(label3, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(InputUsernameLogin, GroupLayout.DEFAULT_SIZE, 375, Short.MAX_VALUE)
+                                        .addComponent(InputNamaLogin))
+                                    .addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGroup(panel2Layout.createSequentialGroup()
+                                    .addComponent(InputPasswordLogin, GroupLayout.PREFERRED_SIZE, 375, GroupLayout.PREFERRED_SIZE)
+                                    .addGap(0, 60, Short.MAX_VALUE))))
                 );
                 panel2Layout.setVerticalGroup(
                     panel2Layout.createParallelGroup()
@@ -217,14 +218,14 @@ public class Login extends JFrame {
                             .addComponent(InputNamaLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(label3, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                            .addGap(11, 11, 11)
                             .addComponent(InputPasswordLogin, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                             .addGap(18, 18, 18)
                             .addGroup(panel2Layout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                 .addComponent(TombLogin)
                                 .addComponent(TombRegister)
                                 .addComponent(TombRole, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-                            .addContainerGap(151, Short.MAX_VALUE))
+                            .addContainerGap(110, Short.MAX_VALUE))
                 );
             }
 
@@ -235,7 +236,7 @@ public class Login extends JFrame {
                     .addGroup(panel1Layout.createSequentialGroup()
                         .addGap(124, 124, 124)
                         .addComponent(panel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(258, Short.MAX_VALUE))
+                        .addContainerGap(264, Short.MAX_VALUE))
             );
             panel1Layout.setVerticalGroup(
                 panel1Layout.createParallelGroup()
@@ -250,7 +251,7 @@ public class Login extends JFrame {
         contentPane.setLayout(contentPaneLayout);
         contentPaneLayout.setHorizontalGroup(
             contentPaneLayout.createParallelGroup()
-                .addComponent(SelamatDatangLogin, GroupLayout.DEFAULT_SIZE, 823, Short.MAX_VALUE)
+                .addComponent(SelamatDatangLogin, GroupLayout.DEFAULT_SIZE, 829, Short.MAX_VALUE)
                 .addComponent(panel1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         contentPaneLayout.setVerticalGroup(
@@ -276,9 +277,9 @@ public class Login extends JFrame {
     private JTextField InputNamaLogin;
     private JLabel label2;
     private JLabel label3;
-    private JTextField InputPasswordLogin;
     private JButton TombLogin;
     private JButton TombRegister;
     private JComboBox<String> TombRole;
+    private JPasswordField InputPasswordLogin;
     // JFormDesigner - End of variables declaration  //GEN-END:variables  @formatter:on
 }

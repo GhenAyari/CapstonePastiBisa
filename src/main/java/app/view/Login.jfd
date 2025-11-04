@@ -4,7 +4,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-			"$horizontalGroup": "par l {comp SelamatDatangLogin::l::823:x, comp panel1::t:::x}"
+			"$horizontalGroup": "par l {comp SelamatDatangLogin::l::829:x, comp panel1::t:::x}"
 			"$verticalGroup": "par l {seq l {space :::p, comp SelamatDatangLogin:::p::p, space :::x, comp panel1:::p::p}}"
 		} ) {
 			name: "this"
@@ -17,14 +17,14 @@ new FormModel {
 				"foreground": new java.awt.Color( 51, 51, 51, 255 )
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-				"$horizontalGroup": "par l {seq l {space :p:124:p, comp panel2:::p::p, space ::258:x}}"
+				"$horizontalGroup": "par l {seq l {space :p:124:p, comp panel2:::p::p, space ::264:x}}"
 				"$verticalGroup": "par l {seq l {space :p:49:p, comp panel2:::p::p, space ::143:x}}"
 			} ) {
 				name: "panel1"
 				"background": new java.awt.Color( 0, 102, 102, 255 )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class org.jdesktop.layout.GroupLayout ) {
-					"$horizontalGroup": "par l {seq {space :::p, par l {seq l {par l:::p {comp label1:::p:155:p, comp label2::l:p:155:p, comp label3::l:p:155:p, comp InputUsernameLogin::l::375:x, comp InputNamaLogin::l:::x, comp InputPasswordLogin::l:::x}, space :::x}, seq l {comp TombLogin:::p::p, space u:::p, comp TombRegister::::132:x, space s:::p, comp TombRole:::p:152:p, space :p:43:p}}}}"
-					"$verticalGroup": "par l {seq l {space :p:15:p, comp label1:::p::p, space :::p, comp InputUsernameLogin:::p::p, space :::p, comp label2:::p::p, space :::p, comp InputNamaLogin:::p::p, space :::p, comp label3:::p:18:p, space :::p, comp InputPasswordLogin:::p::p, space s:::p, par b {comp TombLogin::b:p::p, comp TombRegister::b:p::p, comp TombRole::b:p::p}, space ::151:x}}"
+					"$horizontalGroup": "par l {seq {space :::p, par l {seq l {comp TombLogin:::p::p, space u:::p, comp TombRegister::::132:x, space s:::p, comp TombRole:::p:152:p, space :p:43:p}, seq l {par l:::p {comp label1:::p:155:p, comp label2::l:p:155:p, comp label3::l:p:155:p, comp InputUsernameLogin::l::375:x, comp InputNamaLogin::l:::x}, space :::x}, seq l {comp InputPasswordLogin:::p:375:p, space :0:60:x}}}}"
+					"$verticalGroup": "par l {seq l {space :p:15:p, comp label1:::p::p, space :::p, comp InputUsernameLogin:::p::p, space :::p, comp label2:::p::p, space :::p, comp InputNamaLogin:::p::p, space :::p, comp label3:::p:18:p, space :p:11:p, comp InputPasswordLogin:::p::p, space s:::p, par b {comp TombLogin::b:p::p, comp TombRegister::b:p::p, comp TombRole::b:p::p}, space ::110:x}}"
 				} ) {
 					name: "panel2"
 					"background": new java.awt.Color( 153, 153, 153, 255 )
@@ -54,10 +54,6 @@ new FormModel {
 						"background": #Color0
 						"foreground": #Color1
 					} )
-					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "InputPasswordLogin"
-						"background": #Color2
-					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "TombLogin"
 						"text": "Login"
@@ -75,11 +71,15 @@ new FormModel {
 							addElement( "Student" )
 						}
 					} )
+					add( new FormComponent( "javax.swing.JPasswordField" ) {
+						name: "InputPasswordLogin"
+						"background": new java.awt.Color( 0, 153, 153, 255 )
+					} )
 				} )
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 660, 520 )
+			"size": new java.awt.Dimension( 665, 520 )
 		} )
 	}
 }
