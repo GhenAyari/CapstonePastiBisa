@@ -218,13 +218,33 @@ Pesan tersebut mengindikasikan bahwa quiz baru telah berhasil disimpan bersama d
 
 <img width="932" height="807" alt="image" src="https://github.com/user-attachments/assets/9b68ff82-f4ac-4f44-a1ea-678120210aa3" />
 
+Bagian ini memperlihatkan tahapan pengerjaan quiz oleh pengguna dengan peran student (siswa) hingga melihat hasil akhir dari quiz yang telah diselesaikan.
+Pada tampilan awal, sistem menampilkan halaman utama student yang berisi daftar quiz yang tersedia. Tabel ini memuat kolom Nama Quiz dan Jumlah Soal, yang menunjukkan daftar seluruh quiz yang dapat dikerjakan oleh siswa. Di sisi kanan terdapat beberapa tombol fungsional seperti Kerjakan Quiz, Lihat Skor, Lihat Pesan, dan Kembali.
+Siswa memilih salah satu quiz yang ingin dikerjakan, kemudian menekan tombol “Kerjakan Quiz” untuk memulai.
+
+
+
 <img width="712" height="459" alt="image" src="https://github.com/user-attachments/assets/8f2d8233-e822-4516-853d-7c2bd2b40660" />
+
+Selanjutnya, sistem akan menampilkan jendela baru berisi soal pertama dari quiz yang dipilih. Pada tampilan ini, terdapat teks soal beserta pilihan jawaban (A, B, C, D). Siswa dapat memilih salah satu jawaban yang dianggap benar, kemudian menekan tombol “Next” untuk berpindah ke soal berikutnya.
+
+
 
 <img width="726" height="455" alt="image" src="https://github.com/user-attachments/assets/8851dd0b-14a5-478a-bb09-614b59e39a13" />
 
+Selanjutnya, sistem akan menampilkan jendela baru berisi soal pertama dari quiz yang dipilih. Pada tampilan ini, terdapat teks soal beserta pilihan jawaban (A, B, C, D). Siswa dapat memilih salah satu jawaban yang dianggap benar, kemudian menekan tombol “Next” untuk berpindah ke soal berikutnya.
+
+
+
 <img width="691" height="454" alt="image" src="https://github.com/user-attachments/assets/158eb9e6-1004-40f7-a921-4f33c9958f86" />
 
+Setelah siswa menyelesaikan seluruh soal, tombol “Kumpulkan” akan muncul pada soal terakhir. Ketika siswa menekan tombol tersebut, sistem akan melakukan proses penilaian otomatis berdasarkan jawaban yang telah diinput. Setelah proses penilaian selesai, sistem menampilkan pesan informasi dalam bentuk dialog box, misalnya:
+“Terkumpul! Benar: 2, Salah: 0, Nilai Akhir: 100”
+Pesan ini menunjukkan hasil akhir dari pengerjaan quiz yang meliputi jumlah jawaban benar, jumlah jawaban salah, serta nilai akhir yang diperoleh siswa.
+
+
 <img width="1032" height="728" alt="image" src="https://github.com/user-attachments/assets/ab942e64-c909-4d6a-80cb-7d7e03128676" />
+
 
 
 ### Teacher melihat skor
